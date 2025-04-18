@@ -18,12 +18,18 @@ import NavigationItem from './app-navigation/navigation-item.vue'
 
 <template>
   <div class="fixed bottom-0 left-0 w-full p-2">
-    <div class="w-full grid grid-flow-col bg-white/5 gap-x-4 rounded-2xl p-2">
+    <div
+      class="w-full grid auto-cols-fr grid-flow-col bg-white/5 gap-x-4 rounded-2xl p-2"
+    >
       <NavigationItem
         icon="solar:dollar-minimalistic-bold"
         label="Home"
         to="/"
-        active
+      />
+      <NavigationItem
+        icon="flowbite:arrow-up-down-outline"
+        label="Transactions"
+        to="/transactions"
       />
       <NavigationItem
         icon="material-symbols:settings-heart-rounded"

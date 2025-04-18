@@ -46,7 +46,7 @@ const isActive = computed(() => {
 <template>
   <NuxtLink :to="props.to" :class="variants({ active: isActive })">
     <Icon :name="props.icon" />
-    <span class="font-medium">
+    <span class="font-medium text-sm">
       {{ props.label }}
     </span>
   </NuxtLink>

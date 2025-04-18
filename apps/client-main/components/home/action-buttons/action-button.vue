@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import UiButton from '~/components/ui/ui-button.vue'
+
 /* Models */
 
 /* Props and Emits */
@@ -19,12 +21,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <button
-    class="bg-blue-500/10 hover:bg-blue-500/20 rounded-xl text-blue-300 flex items-center gap-2 justify-center py-2 hover:cursor-pointer transition-colors duration-200"
-  >
-    <span>{{ props.label }}</span>
-    <Icon class="text-3xl" :name="props.icon" />
-  </button>
+  <UiButton :icon="props.icon">{{ label }}</UiButton>
 </template>
 
 <style scoped></style>

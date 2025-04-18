@@ -7,6 +7,7 @@ import AppHeader from '~/components/app/app-header.vue'
 /* Props and Emits */
 
 /* Composables */
+const walletsStore = useWalletsStore()
 
 /* Refs and Reactive Variables */
 
@@ -15,6 +16,9 @@ import AppHeader from '~/components/app/app-header.vue'
 /* Methods */
 
 /* Lifecycle Hooks */
+if (walletsStore.loadedWallets.length === 0) {
+  await navigateTo('/setup')
+}
 </script>
 
 <template>

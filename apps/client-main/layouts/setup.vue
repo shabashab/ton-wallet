@@ -13,8 +13,10 @@
 </script>
 
 <template>
-  <div>
-    <slot />
+  <div class="container font-main bg-slate-900 min-h-screen text-white">
+    <div class="px-4">
+      <slot />
+    </div>
   </div>
 </template>
 

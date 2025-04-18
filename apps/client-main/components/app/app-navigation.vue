@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import NavigationItem from './item.vue'
+import NavigationItem from './app-navigation/navigation-item.vue'
 
 /* Models */
 

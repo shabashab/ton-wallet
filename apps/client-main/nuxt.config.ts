@@ -11,7 +11,7 @@ export default defineNuxtConfig({
     '@nuxt/icon',
   ],
   components: false,
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   css: ['~/assets/css/main.css'],
   runtimeConfig: {
     public: {

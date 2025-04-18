@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import TokenBalancesList from '~/components/home/token-balances-list.vue'
+
 /* Models */
 
 /* Props and Emits */
@@ -15,7 +17,8 @@
 </script>
 
 <template>
-  <div>
+  <div class="flex flex-col items-stretch gap-4">
+    <!-- Balance -->
     <div class="flex flex-col items-center gap-2 py-8">
       <div class="flex flex-row items-end gap-1">
         <span class="text-white font-bold text-5xl">100.34</span>
@@ -23,6 +26,11 @@
       </div>
       <div class="text-white/70">Your balance</div>
     </div>
+
+    <!-- Action buttons -->
+
+    <!-- Balances -->
+    <TokenBalancesList />
   </div>
 </template>
 

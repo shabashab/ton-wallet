@@ -1,16 +1,22 @@
+import tailwindcss from '@tailwindcss/vite'
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-04-17',
-  modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt', '@nuxt/icon', '@nuxt/eslint'],
+  modules: [
+    '@pinia/nuxt',
+    '@nuxt/icon',
+    '@nuxt/eslint',
+    '@nuxt/fonts',
+    '@nuxt/icon',
+  ],
+  components: false,
   devtools: { enabled: true },
+  css: ['~/assets/css/main.css'],
   runtimeConfig: {
     public: {
       apiBaseUrl: '',
     },
-  },
-  tailwindcss: {
-    exposeConfig: true,
-    viewer: true,
   },
   build: {
     transpile: ['@api-def/provider-http'],
@@ -19,6 +25,15 @@ export default defineNuxtConfig({
     server: {
       allowedHosts: ['telegram-mini-app.local'],
     },
+    plugins: [tailwindcss()],
+  },
+  fonts: {
+    families: [
+      {
+        name: 'Montserrat',
+        provider: 'google',
+      },
+    ],
   },
   ssr: false,
 })

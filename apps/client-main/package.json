@@ -11,16 +11,19 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@nuxt/fonts": "~0.11.1",
     "@nuxt/icon": "~1.12.0",
     "@pinia/nuxt": "~0.11.0",
+    "@tailwindcss/vite": "~4.1.4",
     "@vueuse/core": "~13.1.0",
+    "class-variance-authority": "~0.7.1",
     "nuxt": "^3.16.1",
     "radash": "~12.1.0",
+    "tailwindcss": "~4.1.4",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "~6.13.2",
     "@inc-dev/eslint-config-vue": "~2.0.0",
     "@nuxt/eslint": "~1.3.0"
   }

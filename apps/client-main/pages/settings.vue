@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import AppNavigation from '~/components/app-navigation/index.vue'
-
 /* Models */
 
 /* Props and Emits */
@@ -17,11 +15,7 @@ import AppNavigation from '~/components/app-navigation/index.vue'
 </script>
 
 <template>
-  <div class="container font-main bg-slate-900 min-h-screen">
-    <slot />
-
-    <AppNavigation />
-  </div>
+  <div></div>
 </template>
 
 <style scoped></style>

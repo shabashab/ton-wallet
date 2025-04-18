@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ActionButtons from '~/components/home/action-buttons.vue'
 import TokenBalancesList from '~/components/home/token-balances-list.vue'
 
 /* Models */
@@ -28,6 +29,7 @@ import TokenBalancesList from '~/components/home/token-balances-list.vue'
     </div>
 
     <!-- Action buttons -->
+    <ActionButtons />
 
     <!-- Balances -->
     <TokenBalancesList />

@@ -3,6 +3,9 @@ import tailwindcss from '@tailwindcss/vite'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-04-17',
+  experimental: {
+    clientNodeCompat: true,
+  },
   modules: [
     '@pinia/nuxt',
     '@nuxt/icon',

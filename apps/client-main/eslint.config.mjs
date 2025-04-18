@@ -25,6 +25,7 @@ export default withNuxt(
         '@typescript-eslint/no-unsafe-assignment': 'off',
         '@typescript-eslint/no-unsafe-call': 'off',
         '@typescript-eslint/no-unsafe-member-access': 'off',
+        'unicorn/consistent-function-scoping': 'off',
         'unicorn/prevent-abbreviations': [
           'error',
           {

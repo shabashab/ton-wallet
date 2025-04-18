@@ -31,6 +31,8 @@ const props = defineProps<{
   size?: VariantProps<typeof variants>['size']
 }>()
 
+const emit = defineEmits(['click'])
+
 /* Composables */
 
 /* Refs and Reactive Variables */
@@ -45,6 +47,7 @@ const props = defineProps<{
 <template>
   <button
     :class="variants({ buttonStyle: props.buttonStyle, size: props.size })"
+    @click="emit('click')"
   >
     <span><slot /></span>
     <Icon v-if="props.icon" class="text-3xl" :name="props.icon" />

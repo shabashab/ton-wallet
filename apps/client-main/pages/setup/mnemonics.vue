@@ -1,12 +1,10 @@
 <script setup lang="ts">
-definePageMeta({
-  layout: 'setup',
-})
 /* Models */
 
 /* Props and Emits */
 
 /* Composables */
+const setupStore = useSetupStore()
 
 /* Refs and Reactive Variables */
 
@@ -15,8 +13,15 @@ definePageMeta({
 /* Methods */
 
 /* Lifecycle Hooks */
+
+console.log('wtf')
+await setupStore.generateMnemonics()
 </script>
 
 <template>
-  <div><NuxtPage></NuxtPage></div>
+  <div>
+    {{ setupStore.setupMnemonics }}
+  </div>
 </template>
+
+<style scoped></style>

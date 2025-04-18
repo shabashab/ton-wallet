@@ -9,7 +9,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint",
-    "reverse-proxy": "caddy reverse-proxy --from :80 --to :13240 --insecure"
+    "reverse-proxy": "caddy run"
   },
   "dependencies": {
     "@nuxt/fonts": "~0.11.1",
@@ -17,6 +17,7 @@
     "@pinia/nuxt": "~0.11.0",
     "@tailwindcss/vite": "~4.1.4",
     "@ton/core": "~0",
+    "@ton/crypto": "^3.3.0",
     "@twa-dev/sdk": "~8.0.2",
     "@vueuse/core": "~13.1.0",
     "class-variance-authority": "~0.7.1",

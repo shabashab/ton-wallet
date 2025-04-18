@@ -1,0 +1,20 @@
+{
+  "Provider": {
+    "prefix": "provider",
+    "body": [
+      "import { defineProvider } from '@mikrokit/di'",
+      "",
+      "export const $1 = defineProvider(async (injector) => {",
+      "\t$0",
+      "}, '$1')"
+    ],
+    "description": "@mikrokit/di provider (basically same as service)"
+  },
+  "Inject": {
+    "prefix": "inject",
+    "body": [
+      "const $2 = await injector.inject($1)",
+      "$0"
+    ]
+  }
+}

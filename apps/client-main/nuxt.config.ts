@@ -21,9 +21,6 @@ export default defineNuxtConfig({
       apiBaseUrl: '',
     },
   },
-  build: {
-    transpile: ['@api-def/provider-http'],
-  },
   vite: {
     server: {
       allowedHosts: ['telegram-mini-app.local'],

@@ -9,7 +9,7 @@ export const base64StringToArrayBuffer = (base64String: string) => {
   return bytes.buffer
 }
 
-export function arrayBufferToBase64(buffer: ArrayBuffer) {
+export const arrayBufferToBase64 = (buffer: ArrayBufferLike) => {
   let binary = ''
 
   const bytes = new Uint8Array(buffer)

@@ -1,7 +1,5 @@
-import { Address } from '@ton/core'
 import { WalletLoadingError } from '~/errors/wallet-loading.error'
 import type { LoadedWallet } from '~/models/loaded-wallet.model'
-import { arrayBufferToBase64, base64StringToArrayBuffer } from '~/utils/base-64'
 import { cluster } from 'radash'
 
 const WALLETS_CHUNKS_COUNT_CLOUD_STORAGE_KEY = 'wallet-chunks'
@@ -84,9 +82,9 @@ export const useWalletsStorage = () => {
 
   const stringifyWallet = (wallet: LoadedWallet): string => {
     const walletParts: string[] = [
-      wallet.address.toString(),
-      wallet.publicKey,
-      arrayBufferToBase64(wallet.encryptedPrivateKey),
+      `${wallet.index}`,
+      wallet.publicKey.toString('base64'),
+      wallet.encryptedSecretKey,
     ]
 
     return walletParts.join(CHUNK_WALLET_PARTS_SEPARATOR)
@@ -112,16 +110,14 @@ export const useWalletsStorage = () => {
       throw new WalletLoadingError(`Unexpected wallet data ${walletRaw}`)
     }
 
-    const [addressRaw, publicKey, encryptedPrivateKeyRaw] = walletParts
+    const [indexRaw, publicKeyRaw, encryptedSecretKey] = walletParts
 
-    const address = Address.parse(addressRaw)
-    const encryptedPrivateKey = base64StringToArrayBuffer(
-      encryptedPrivateKeyRaw
-    )
+    const index = Number.parseInt(indexRaw)
+    const publicKey = Buffer.from(publicKeyRaw, 'base64')
 
     return {
-      address,
-      encryptedPrivateKey,
+      index,
+      encryptedSecretKey,
       publicKey,
     }
   }
@@ -145,7 +141,7 @@ export const useWalletsStorage = () => {
   }
 
   const createWalletChunkNameByIndex = (index: number) => {
-    return `${WALLETS_CLOUD_STORAGE_KEY_PREFIX}:${index}`
+    return `${WALLETS_CLOUD_STORAGE_KEY_PREFIX}--${index}`
   }
 
   return {

@@ -1,5 +1,5 @@
 {
- "Inc-Dev Template": {
+ ".vue SFC setup template": {
     "prefix": "vue",
     "body": [
       "<script setup lang=\"ts\">",
@@ -25,6 +25,13 @@
       "<style scoped></style>",
       "$0"
     ],
-    "description": "Inc-Dev Template"
-  } 
+  },
+  "Pinia store": {
+    "prefix": "store",
+    "body": [
+      "export const $1 = defineStore('$2', () => {",
+      "  $0",
+      "})"
+    ],
+  }
 }

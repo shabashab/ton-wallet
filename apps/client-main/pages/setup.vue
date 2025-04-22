@@ -7,6 +7,8 @@ definePageMeta({
 /* Props and Emits */
 
 /* Composables */
+const route = useRoute()
+const setupStore = useSetupStore()
 
 /* Refs and Reactive Variables */
 
@@ -15,6 +17,11 @@ definePageMeta({
 /* Methods */
 
 /* Lifecycle Hooks */
+
+console.log(setupStore.setupMnemonics, route.path)
+if (!setupStore.setupMnemonics && route.path !== '/setup') {
+  await navigateTo('/setup')
+}
 </script>
 
 <template>

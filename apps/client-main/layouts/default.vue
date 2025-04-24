@@ -8,6 +8,7 @@ import AppHeader from '~/components/app/app-header.vue'
 
 /* Composables */
 const walletsStore = useWalletsStore()
+const activeWalletStore = useActiveWalletStore()
 
 /* Refs and Reactive Variables */
 
@@ -18,6 +19,10 @@ const walletsStore = useWalletsStore()
 /* Lifecycle Hooks */
 if (walletsStore.loadedWallets.length === 0) {
   await navigateTo('/setup')
+}
+
+if (!activeWalletStore.activeWallet) {
+  await activeWalletStore.setActiveWallet(walletsStore.loadedWallets[0])
 }
 </script>
 

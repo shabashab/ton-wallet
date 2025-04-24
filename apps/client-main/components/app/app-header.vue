@@ -7,9 +7,9 @@ import WalletSelectionButton from './app-header/wallet-selection-button.vue'
 /* Props and Emits */
 
 /* Composables */
+const activeWalletStore = useActiveWalletStore()
 
 /* Refs and Reactive Variables */
-const currentAddress = ref('EQA2yYfSNKGjgRiR2qW4abxE7SdwclFy_4wBOpSUr9ifXbkc')
 
 /* Computed Properties */
 
@@ -20,7 +20,11 @@ const currentAddress = ref('EQA2yYfSNKGjgRiR2qW4abxE7SdwclFy_4wBOpSUr9ifXbkc')
 
 <template>
   <div class="text-white flex justify-between p-2 gap-4">
-    <CurrentWallet name="Wallet Name" :address="currentAddress" />
+    <CurrentWallet
+      v-if="activeWalletStore.activeWalletAddress"
+      name="Wallet Name"
+      :address="activeWalletStore.activeWalletAddress.toString()"
+    />
     <div class="flex-1"></div>
     <WalletSelectionButton />
   </div>

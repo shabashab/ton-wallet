@@ -21,6 +21,16 @@ const ConfigSchema = z.object({
     (value) => value === 'true',
     z.boolean().default(false)
   ),
+
+  TESTNET_TON_RPC_URL: z.string().url(),
+  TESTNET_TON_RPC_API_KEY: z.string(),
+  TESTNET_TONCENTER_INDEXER_API_URL: z.string().url(),
+  TESTNET_TONCENTER_API_TOKEN: z.string(),
+
+  TON_RPC_URL: z.string().url(),
+  TON_RPC_API_KEY: z.string(),
+  TONCENTER_INDEXER_API_URL: z.string().url(),
+  TONCENTER_API_TOKEN: z.string(),
 })
 
 export const Config = defineProvider(() => {

@@ -22,7 +22,7 @@ export const BlockchainIndexerService = defineProvider(async (injector) => {
   const testnetIndexerAxiosInstance = axios.create({
     baseURL: config.TESTNET_TONCENTER_INDEXER_API_URL,
     headers: {
-      'X-API-Key': config.TONCENTER_API_TOKEN,
+      'X-API-Key': config.TESTNET_TONCENTER_API_TOKEN,
     },
   })
 
@@ -44,7 +44,7 @@ export const BlockchainIndexerService = defineProvider(async (injector) => {
 
     const response = await indexerAxios.get('/api/v3/jetton/wallets', {
       params: {
-        owner_address: [address.toString()],
+        owner_address: address.toString(),
       },
     })
 

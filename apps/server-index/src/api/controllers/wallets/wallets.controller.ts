@@ -11,7 +11,7 @@ export const WalletsController = defineController(
   async (r, injector) => {
     const walletsService = await injector.inject(WalletsService)
 
-    r.auth.get(
+    r.public.get(
       '/:walletAddress/fungible-assets',
       {
         docs: {

@@ -12,6 +12,8 @@ import { FungibleAssetsPricesService } from './fungible-assets-prices.service'
 import { TonClientService } from './ton-client.service'
 import { Decimal } from 'decimal.js'
 
+const DEFAULT_DECIMALS = 9
+
 const TON_META: WalletFungibleAssetMeta = {
   symbol: 'TON',
   displayName: 'TON',
@@ -46,7 +48,7 @@ export const FungibleAssetsService = defineProvider(async (injector) => {
           },
           ...walletJettonsResponse.jetton_wallets.map((jetton) => ({
             type: 'jetton' as const,
-            contractAddress: Address.parse(jetton.address),
+            contractAddress: Address.parse(jetton.jetton),
           })),
         ],
         network
@@ -70,8 +72,8 @@ export const FungibleAssetsService = defineProvider(async (injector) => {
       },
       ...walletJettonsResponse.jetton_wallets.flatMap((wallet) => {
         const meta =
-          walletJettonsResponse.metadata[wallet.address]?.token_info[0]
-        const parsedAddress = Address.parse(wallet.address)
+          walletJettonsResponse.metadata[wallet.jetton]?.token_info[0]
+        const parsedAddress = Address.parse(wallet.jetton)
         const userFriendlyAddress = parsedAddress.toString()
 
         if (!meta) {
@@ -79,7 +81,7 @@ export const FungibleAssetsService = defineProvider(async (injector) => {
         }
 
         const balanceDecimal = new Decimal(wallet.balance).div(
-          new Decimal(10).pow(meta.extra.decimals)
+          new Decimal(10).pow(meta.extra.decimals ?? DEFAULT_DECIMALS)
         )
 
         const price = prices.find(
@@ -102,7 +104,9 @@ export const FungibleAssetsService = defineProvider(async (injector) => {
             symbol: meta.name,
             displayName: meta.name,
             imageUrl: meta.image,
-            decimals: Number.parseInt(meta.extra.decimals),
+            decimals: meta.extra.decimals
+              ? Number.parseInt(meta.extra.decimals)
+              : DEFAULT_DECIMALS,
           },
         } satisfies WalletFungibleAssetJetton
       }),

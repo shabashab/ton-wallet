@@ -42,11 +42,13 @@ export const BlockchainIndexerService = defineProvider(async (injector) => {
   ): Promise<IndexerWalletJettonsResponse> => {
     const indexerAxios = getIndexerAxiosInstanceByNetworkType(networkType)
 
-    return await indexerAxios.get('/api/v3/jetton/wallets', {
+    const response = await indexerAxios.get('/api/v3/jetton/wallets', {
       params: {
-        ownerAddress: [address.toString()],
+        owner_address: [address.toString()],
       },
     })
+
+    return response.data as unknown as IndexerWalletJettonsResponse
   }
 
   return {

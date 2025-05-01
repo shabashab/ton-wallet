@@ -1,21 +1,8 @@
-import {
-  AssetPriceSelect,
-  assetPriceType,
-  assetsPrices,
-} from '@database/schema'
+import { AssetPriceSelect, assetsPrices } from '@database/schema'
 import { defineRepository } from './_utils'
-import {
-  and,
-  desc,
-  eq,
-  exists,
-  getTableColumns,
-  gte,
-  inArray,
-  notExists,
-  sql,
-} from 'drizzle-orm'
+import { and, desc, eq, getTableColumns, gte, inArray, sql } from 'drizzle-orm'
 import { NetworkType } from '@interfaces/network-type.type'
+import { omit } from 'radash'
 
 export const AssetsPricesRepository = defineRepository(async (db) => {
   const findValidTonPriceByNetworkType = async (networkType: NetworkType) => {
@@ -52,7 +39,7 @@ export const AssetsPricesRepository = defineRepository(async (db) => {
           eq(assetsPrices.networkType, networkType)
         )
       )
-      .as('latest_prices_sq')
+      .as('assets_prices')
 
     const latestPrices = await db
       .select({

@@ -42,5 +42,5 @@ export interface IndexerJettonWalletsMetadataItemTokenInfo {
 }
 
 export interface IndexerJettonWalletsMetadataItemTokenInfoExtra {
-  decimals: string
+  decimals?: string
 }

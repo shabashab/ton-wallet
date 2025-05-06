@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { cva, type VariantProps } from 'class-variance-authority'
+import { motion } from 'motion-v'
 
 const variants = cva(
-  'rounded-xl flex items-center gap-2 justify-center hover:cursor-pointer transition-colors duration-200',
+  'rounded-xl flex items-center gap-2 justify-center hover:cursor-pointer',
   {
     variants: {
       buttonStyle: {
-        primary: 'bg-blue-500 text-white hover:bg-blue-700',
-        secondary: 'bg-blue-500/10 hover:bg-blue-500/20 text-blue-300',
+        primary: 'bg-blue-500 text-white',
+        secondary: 'bg-blue-500/10 text-blue-300',
       },
       size: {
         medium: 'py-2 px-4',
@@ -45,13 +46,15 @@ const emit = defineEmits(['click'])
 </script>
 
 <template>
-  <button
+  <motion.button
     :class="variants({ buttonStyle: props.buttonStyle, size: props.size })"
+    :press="{ scale: 0.95 }"
+    :hover="{ scale: 1.05 }"
     @click="emit('click')"
   >
     <span><slot /></span>
     <Icon v-if="props.icon" class="text-3xl" :name="props.icon" />
-  </button>
+  </motion.button>
 </template>
 
 <style scoped></style>

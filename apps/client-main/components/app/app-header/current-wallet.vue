@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import TestnetBadge from './testnet-badge.vue'
+import { AnimatePresence, motion } from 'motion-v'
 
 /* Models */
 
@@ -30,10 +31,17 @@ const addressShort = computed(() => {
   >
     <span class="font-medium">
       Wallet Name
-      <TestnetBadge
-        v-if="networkStore.currentNetwork === 'testnet'"
-        class="ml-2"
-      />
+      <AnimatePresence>
+        <motion.div
+          v-if="networkStore.currentNetwork === 'testnet'"
+          :initial="{ opacity: 0, scale: 0.8 }"
+          :animate="{ opacity: 1, scale: 1 }"
+          :exit="{ opacity: 0, scale: 0.8 }"
+          class="inline-block"
+        >
+          <TestnetBadge class="ml-2" />
+        </motion.div>
+      </AnimatePresence>
     </span>
     <div
       class="flex flx-row items-center gap-2 opacity-40 group-hover:opacity-80 transition-opacity duration-200"

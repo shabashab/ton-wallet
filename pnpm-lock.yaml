@@ -81,6 +81,9 @@ importers:
       crypto-js:
         specifier: ~4.2.0
         version: 4.2.0
+      motion-v:
+        specifier: ~1.0.2
+        version: 1.0.2(react@19.1.0)(vue@3.5.13(typescript@5.8.3))
       nuxt:
         specifier: ^3.16.1
         version: 3.16.1(@electric-sql/pglite@0.2.17)(@parcel/watcher@2.5.1)(@types/node@22.14.1)(db0@0.3.1(@electric-sql/pglite@0.2.17)(drizzle-orm@0.40.1(@electric-sql/pglite@0.2.17)(gel@2.0.1)(pg@8.13.3)))(drizzle-orm@0.40.1(@electric-sql/pglite@0.2.17)(gel@2.0.1)(pg@8.13.3))(eslint@9.23.0(jiti@2.4.2))(ioredis@5.6.0)(lightningcss@1.29.2)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.36.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.3)(vite@6.2.2(@types/node@22.14.1)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1))(yaml@2.7.1)
@@ -2376,6 +2379,9 @@ packages:
   '@types/tough-cookie@4.0.5':
     resolution: {integrity: sha512-/Ad8+nIOV7Rl++6f1BdKxFSMgmoqEoYbHRpPcx3JEfv8VRsQe9Z4mCXeJBzxs7mbHY/XOZZuXlRNfhpVPbs6ZA==}
 
+  '@types/web-bluetooth@0.0.20':
+    resolution: {integrity: sha512-g9gZnnXVq7gM7v3tJCWV/qw7w+KeOlSHAhgF9RytFyifW6AF61hdT2ucrYhPq9hLs5JIryeupHV3qGk95dH9ow==}
+
   '@types/web-bluetooth@0.0.21':
     resolution: {integrity: sha512-oIQLCGWtcFZy2JW77j9k8nHzAOpqMHLQejDA48XXMWH6tjCQHz5RCFz1bzsmROyL6PUm+LLnUiI4BCn221inxA==}
 
@@ -2691,6 +2697,9 @@ packages:
       '@vue/composition-api':
         optional: true
 
+  '@vueuse/core@10.11.1':
+    resolution: {integrity: sha512-guoy26JQktXPcz+0n3GukWIy/JDNKti9v6VEMu6kV2sYBsWuGiTU8OWdg+ADfUbHg3/3DlqySDe7JmdHrktiww==}
+
   '@vueuse/core@12.8.2':
     resolution: {integrity: sha512-HbvCmZdzAu3VGi/pWYm5Ut+Kd9mn1ZHnn4L5G8kOQTPs/IwIAmJoBrmYk2ckLArgMXZj0AW3n5CAejLUO+PhdQ==}
 
@@ -2699,11 +2708,17 @@ packages:
     peerDependencies:
       vue: ^3.5.0
 
+  '@vueuse/metadata@10.11.1':
+    resolution: {integrity: sha512-IGa5FXd003Ug1qAZmyE8wF3sJ81xGLSqTqtQ6jaVfkeZ4i5kS2mwQF61yhVqojRnenVew5PldLyRgvdl4YYuSw==}
+
   '@vueuse/metadata@12.8.2':
     resolution: {integrity: sha512-rAyLGEuoBJ/Il5AmFHiziCPdQzRt88VxR+Y/A/QhJ1EWtWqPBBAxTAFaSkviwEuOEZNtW8pvkPgoCZQ+HxqW1A==}
 
   '@vueuse/metadata@13.1.0':
     resolution: {integrity: sha512-+TDd7/a78jale5YbHX9KHW3cEDav1lz1JptwDvep2zSG8XjCsVE+9mHIzjTOaPbHUAk5XiE4jXLz51/tS+aKQw==}
+
+  '@vueuse/shared@10.11.1':
+    resolution: {integrity: sha512-LHpC8711VFZlDaYUXEBbFBCQ7GS3dVU9mjOhhMhXP6txTV4EhYQg/KGnQuvt/sPAtoUKq7VVUnL6mVtFoL42sA==}
 
   '@vueuse/shared@12.8.2':
     resolution: {integrity: sha512-dznP38YzxZoNloI0qpEfpkms8knDtaoQ6Y/sfS0L7Yki4zh40LFHEhur0odJC6xTHG5dxWVPiUWBXn+wCG2s5w==}
@@ -4275,6 +4290,20 @@ packages:
   fraction.js@4.3.7:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
 
+  framer-motion@12.5.0:
+    resolution: {integrity: sha512-buPlioFbH9/W7rDzYh1C09AuZHAk2D1xTA1BlounJ2Rb9aRg84OXexP0GLd+R83v0khURdMX7b5MKnGTaSg5iA==}
+    peerDependencies:
+      '@emotion/is-prop-valid': '*'
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      '@emotion/is-prop-valid':
+        optional: true
+      react:
+        optional: true
+      react-dom:
+        optional: true
+
   fresh@0.5.2:
     resolution: {integrity: sha512-zJ2mQYM18rEFOudeV4GShTGIQ7RbzA7ozbU9I/XBpm7kqgMywgmylMwXHxZJmkVoYkna9d2pVXVXPdYTP9ej8Q==}
     engines: {node: '>= 0.6'}
@@ -4479,6 +4508,9 @@ packages:
 
   help-me@5.0.0:
     resolution: {integrity: sha512-7xgomUX6ADmcYzFik0HzAxh/73YlKR9bmFzf51CZwR+b6YtzU2m0u49hQCqV6SvlqIqsaxovfwdvbnsw3b/zpg==}
+
+  hey-listen@1.0.8:
+    resolution: {integrity: sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==}
 
   hookable@5.5.3:
     resolution: {integrity: sha512-Yc+BQe8SvoXH1643Qez1zqLRmbA5rCL+sSmk6TVos0LWVfNIB7PGncdlId77WzLGSIB5KaWgTaNTs2lNVEI6VQ==}
@@ -5450,6 +5482,17 @@ packages:
 
   mocked-exports@0.1.1:
     resolution: {integrity: sha512-aF7yRQr/Q0O2/4pIXm6PZ5G+jAd7QS4Yu8m+WEeEHGnbo+7mE36CbLSDQiXYV8bVL3NfmdeqPJct0tUlnjVSnA==}
+
+  motion-dom@12.10.0:
+    resolution: {integrity: sha512-TbRFEjQmRIDEFXJFIHfvM3VW8PuQ8bSWwwYxWA5Elq+GCghzqYUQ1FDQK/K6PmtmOoLiQY3ttJE6CrOedRrGgw==}
+
+  motion-utils@12.9.4:
+    resolution: {integrity: sha512-BW3I65zeM76CMsfh3kHid9ansEJk9Qvl+K5cu4DVHKGsI52n76OJ4z2CUJUV+Mn3uEP9k1JJA3tClG0ggSrRcg==}
+
+  motion-v@1.0.2:
+    resolution: {integrity: sha512-Qn/X9Mx/5g02rjvpGtn5fht2OWTAnZoed4vLXgjM0lJgkSEtoGuadwEVypbCVH3WW1AHsns2k2okKAjpDrKu6A==}
+    peerDependencies:
+      vue: '>=3.0.0'
 
   mrmime@2.0.1:
     resolution: {integrity: sha512-Y3wQdFg2Va6etvQ5I82yUhGdsKrcYox6p7FfL1LbK2J4V01F9TGlepTIhnK24t7koZibmg82KGglhA1XK5IsLQ==}
@@ -7375,6 +7418,17 @@ packages:
 
   vue-demi@0.13.11:
     resolution: {integrity: sha512-IR8HoEEGM65YY3ZJYAjMlKygDQn25D5ajNFNoKh9RSDMQtlzCxtfQjdQgv9jjK+m3377SsJXY8ysq8kLCZL25A==}
+    engines: {node: '>=12'}
+    hasBin: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^3.0.0-0 || ^2.6.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+
+  vue-demi@0.14.10:
+    resolution: {integrity: sha512-nMZBOwuzabUO0nLgIcc6rycZEebF6eeUfaiQx9+WSk8e29IbLvPU9feI6tqW4kTo3hvoYAJkMh8n8D0fuISphg==}
     engines: {node: '>=12'}
     hasBin: true
     peerDependencies:
@@ -9860,6 +9914,8 @@ snapshots:
 
   '@types/tough-cookie@4.0.5': {}
 
+  '@types/web-bluetooth@0.0.20': {}
+
   '@types/web-bluetooth@0.0.21': {}
 
   '@types/yargs-parser@21.0.3': {}
@@ -10271,6 +10327,16 @@ snapshots:
       vue: 3.5.13(typescript@5.8.3)
       vue-demi: 0.13.11(vue@3.5.13(typescript@5.8.3))
 
+  '@vueuse/core@10.11.1(vue@3.5.13(typescript@5.8.3))':
+    dependencies:
+      '@types/web-bluetooth': 0.0.20
+      '@vueuse/metadata': 10.11.1
+      '@vueuse/shared': 10.11.1(vue@3.5.13(typescript@5.8.3))
+      vue-demi: 0.14.10(vue@3.5.13(typescript@5.8.3))
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+
   '@vueuse/core@12.8.2(typescript@5.8.3)':
     dependencies:
       '@types/web-bluetooth': 0.0.21
@@ -10287,9 +10353,18 @@ snapshots:
       '@vueuse/shared': 13.1.0(vue@3.5.13(typescript@5.8.3))
       vue: 3.5.13(typescript@5.8.3)
 
+  '@vueuse/metadata@10.11.1': {}
+
   '@vueuse/metadata@12.8.2': {}
 
   '@vueuse/metadata@13.1.0': {}
+
+  '@vueuse/shared@10.11.1(vue@3.5.13(typescript@5.8.3))':
+    dependencies:
+      vue-demi: 0.14.10(vue@3.5.13(typescript@5.8.3))
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
 
   '@vueuse/shared@12.8.2(typescript@5.8.3)':
     dependencies:
@@ -11939,6 +12014,14 @@ snapshots:
 
   fraction.js@4.3.7: {}
 
+  framer-motion@12.5.0(react@19.1.0):
+    dependencies:
+      motion-dom: 12.10.0
+      motion-utils: 12.9.4
+      tslib: 2.8.1
+    optionalDependencies:
+      react: 19.1.0
+
   fresh@0.5.2: {}
 
   fs-minipass@2.1.0:
@@ -12173,6 +12256,8 @@ snapshots:
       function-bind: 1.1.2
 
   help-me@5.0.0: {}
+
+  hey-listen@1.0.8: {}
 
   hookable@5.5.3: {}
 
@@ -13290,6 +13375,25 @@ snapshots:
       ufo: 1.5.4
 
   mocked-exports@0.1.1: {}
+
+  motion-dom@12.10.0:
+    dependencies:
+      motion-utils: 12.9.4
+
+  motion-utils@12.9.4: {}
+
+  motion-v@1.0.2(react@19.1.0)(vue@3.5.13(typescript@5.8.3)):
+    dependencies:
+      '@vueuse/core': 10.11.1(vue@3.5.13(typescript@5.8.3))
+      framer-motion: 12.5.0(react@19.1.0)
+      hey-listen: 1.0.8
+      motion-dom: 12.10.0
+      vue: 3.5.13(typescript@5.8.3)
+    transitivePeerDependencies:
+      - '@emotion/is-prop-valid'
+      - '@vue/composition-api'
+      - react
+      - react-dom
 
   mrmime@2.0.1: {}
 
@@ -15467,6 +15571,10 @@ snapshots:
       ufo: 1.5.4
 
   vue-demi@0.13.11(vue@3.5.13(typescript@5.8.3)):
+    dependencies:
+      vue: 3.5.13(typescript@5.8.3)
+
+  vue-demi@0.14.10(vue@3.5.13(typescript@5.8.3)):
     dependencies:
       vue: 3.5.13(typescript@5.8.3)
 

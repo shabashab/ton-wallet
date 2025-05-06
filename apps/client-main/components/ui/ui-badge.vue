@@ -5,7 +5,7 @@ const variants = cva('inline-block px-2 py-1 font-semibold rounded-md', {
   variants: {
     badgeStyle: {
       neutral: 'bg-slate-500/80 text-slate-100',
-      warning: 'bg-amber-400/80 text-amber-100',
+      warning: 'bg-amber-400/80 text-white/90',
     },
     size: {
       md: 'text-base',

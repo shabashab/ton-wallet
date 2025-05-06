@@ -5,6 +5,7 @@
 
 /* Composables */
 const walletsStore = useWalletsStore()
+const settingsStore = useSettingsStore()
 
 /* Refs and Reactive Variables */
 
@@ -14,6 +15,7 @@ const walletsStore = useWalletsStore()
 
 /* Lifecycle Hooks */
 await walletsStore.loadCloudStorageWallets()
+settingsStore.loadSettingsFromLocalStorage()
 </script>
 
 <template>

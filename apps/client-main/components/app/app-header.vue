@@ -8,6 +8,7 @@ import WalletSelectionButton from './app-header/wallet-selection-button.vue'
 
 /* Composables */
 const activeWalletStore = useActiveWalletStore()
+const walletSelectionStore = useWalletSelectionStore()
 
 /* Refs and Reactive Variables */
 
@@ -26,7 +27,9 @@ const activeWalletStore = useActiveWalletStore()
       :address="activeWalletStore.activeWalletAddress.toString()"
     />
     <div class="flex-1"></div>
-    <WalletSelectionButton />
+    <WalletSelectionButton
+      @click="walletSelectionStore.displayWalletSelectionDialog = true"
+    />
   </div>
 </template>
 

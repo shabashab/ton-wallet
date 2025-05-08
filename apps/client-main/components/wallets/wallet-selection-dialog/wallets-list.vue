@@ -9,12 +9,22 @@ import WalletsListItem from './wallets-list-item.vue'
 /* Composables */
 const walletsStore = useWalletsStore()
 const activeWalletStore = useActiveWalletStore()
+const confirmPassword = usePasswordConfirmation()
 
 /* Refs and Reactive Variables */
 
 /* Computed Properties */
 
 /* Methods */
+const onCreateNewWalletButtonClick = async () => {
+  const password = await confirmPassword()
+
+  if (!password) {
+    return
+  }
+
+  await walletsStore.generateNextWalletWithMnemonics(password)
+}
 
 /* Lifecycle Hooks */
 </script>
@@ -27,7 +37,7 @@ const activeWalletStore = useActiveWalletStore()
       :wallet
       :active="activeWalletStore.activeWallet?.index === wallet.index"
     />
-    <UiButton>Create new wallet</UiButton>
+    <UiButton @click="onCreateNewWalletButtonClick">Create new wallet</UiButton>
   </div>
 </template>
 

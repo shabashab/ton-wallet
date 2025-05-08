@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { cva } from 'class-variance-authority'
 import type { ErrorObject } from '@vuelidate/core'
-import type { InputHTMLAttributes } from 'vue'
 import { useFormError } from '~/composables/use-form-error'
 
 const labelSpanVariants = cva('text-sm opacity-60', {
@@ -21,7 +20,7 @@ const props = withDefaults(
   defineProps<{
     label: string
     name: string
-    type?: InputHTMLAttributes['type']
+    type?: 'text' | 'password'
     error?: string | ErrorObject | ErrorObject[]
   }>(),
   {
@@ -49,7 +48,7 @@ const { errorExists, errorMessage } = useFormError(computed(() => props.error))
     }}</span>
     <input
       v-model="modelValue"
-      class="bg-slate-800 p-3 rounded-lg"
+      class="bg-slate-800 border border-slate-500/50 p-3 rounded-lg"
       :type="props.type"
       :name="props.label"
     />

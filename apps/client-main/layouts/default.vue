@@ -2,6 +2,7 @@
 import AppNavigation from '~/components/app/app-navigation.vue'
 import AppHeader from '~/components/app/app-header.vue'
 import WalletSelectionDialog from '~/components/wallets/wallet-selection-dialog.vue'
+import PasswordConfirmationDialog from '~/components/password/password-confirmation-dialog.vue'
 
 /* Models */
 
@@ -31,6 +32,7 @@ if (!activeWalletStore.activeWallet) {
   <div class="container font-main bg-slate-900 min-h-screen text-white">
     <!-- Dialogs and other non-visible elements -->
     <WalletSelectionDialog />
+    <PasswordConfirmationDialog />
 
     <AppHeader />
 

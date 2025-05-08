@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { cva, type VariantProps } from 'class-variance-authority'
 import { motion } from 'motion-v'
+import type { ButtonHTMLAttributes } from 'vue'
 
 const variants = cva(
   'rounded-xl flex items-center gap-2 justify-center hover:cursor-pointer',
@@ -9,6 +10,7 @@ const variants = cva(
       buttonStyle: {
         primary: 'bg-blue-500 text-white',
         secondary: 'bg-blue-500/10 text-blue-300',
+        neutral: 'bg-slate-400',
       },
       size: {
         medium: 'py-2 px-4',
@@ -30,6 +32,8 @@ const props = defineProps<{
 
   buttonStyle?: VariantProps<typeof variants>['buttonStyle']
   size?: VariantProps<typeof variants>['size']
+
+  type?: ButtonHTMLAttributes['type']
 }>()
 
 const emit = defineEmits(['click'])
@@ -50,6 +54,7 @@ const emit = defineEmits(['click'])
     :class="variants({ buttonStyle: props.buttonStyle, size: props.size })"
     :press="{ scale: 0.95 }"
     :hover="{ scale: 1.05 }"
+    :type="props.type"
     @click="emit('click')"
   >
     <span><slot /></span>

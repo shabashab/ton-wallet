@@ -11,9 +11,14 @@ export const useActiveWalletStore = defineStore('active-wallet', () => {
     activeWalletAddress.value = calculateWalletAddress(wallet.publicKey)
   }
 
+  const activeWalletAddressString = computed(() => {
+    return activeWalletAddress.value?.toString()
+  })
+
   return {
     activeWallet,
     activeWalletAddress,
+    activeWalletAddressString,
     setActiveWallet,
   }
 })

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import ActionButtons from '~/components/home/action-buttons.vue'
+import ActionButton from '~/components/home/action-buttons/action-button.vue'
+import ReceiveFundsDialog from '~/components/home/receive-funds-dialog.vue'
 import TokenBalancesList from '~/components/home/token-balances-list.vue'
 
 /* Models */
@@ -9,16 +10,22 @@ import TokenBalancesList from '~/components/home/token-balances-list.vue'
 /* Composables */
 
 /* Refs and Reactive Variables */
+const displayReceiveDialog = ref(false)
 
 /* Computed Properties */
 
 /* Methods */
+const onReceiveButtonClick = () => {
+  displayReceiveDialog.value = true
+}
 
 /* Lifecycle Hooks */
 </script>
 
 <template>
   <div class="flex flex-col items-stretch gap-4">
+    <ReceiveFundsDialog v-model:open="displayReceiveDialog" />
+
     <!-- Balance -->
     <div class="flex flex-col items-center gap-2 py-8">
       <div class="flex flex-row items-end gap-1">
@@ -29,7 +36,17 @@ import TokenBalancesList from '~/components/home/token-balances-list.vue'
     </div>
 
     <!-- Action buttons -->
-    <ActionButtons />
+    <div class="grid auto-cols-fr grid-flow-col gap-x-4">
+      <ActionButton
+        label="Send"
+        icon="material-symbols:arrow-upward-alt-rounded"
+      />
+      <ActionButton
+        label="Receive"
+        icon="material-symbols:arrow-downward-alt-rounded"
+        @click="onReceiveButtonClick"
+      />
+    </div>
 
     <!-- Balances -->
     <TokenBalancesList />

@@ -5,22 +5,12 @@ import ActionButton from './action-buttons/action-button.vue'
 /* Props and Emits */
 
 /* Composables */
-const confirmPassword = usePasswordConfirmation()
 
 /* Refs and Reactive Variables */
 
 /* Computed Properties */
 
 /* Methods */
-const onSendButtonClick = () => {
-  confirmPassword()
-    .then((value) => {
-      console.log('confirmPassword', value)
-    })
-    .catch((error: unknown) => {
-      console.error(error)
-    })
-}
 
 /* Lifecycle Hooks */
 </script>
@@ -30,7 +20,6 @@ const onSendButtonClick = () => {
     <ActionButton
       label="Send"
       icon="material-symbols:arrow-upward-alt-rounded"
-      @click="onSendButtonClick"
     />
     <ActionButton
       label="Receive"

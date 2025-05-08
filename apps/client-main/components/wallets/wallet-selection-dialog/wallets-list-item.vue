@@ -11,6 +11,8 @@ const props = defineProps<{
 }>()
 
 /* Composables */
+const activeWalletStore = useActiveWalletStore()
+const walletSelectionStore = useWalletSelectionStore()
 
 /* Refs and Reactive Variables */
 
@@ -26,18 +28,25 @@ const truncatedAddressString = computed(() => {
 })
 
 /* Methods */
+const onListItemClick = async () => {
+  await activeWalletStore.setActiveWallet(props.wallet)
+  walletSelectionStore.displayWalletSelectionDialog = false
+}
 
 /* Lifecycle Hooks */
 </script>
 
 <template>
-  <div class="p-4 bg-slate-900/50 rounded-lg flex items-center gap-2">
+  <button
+    class="p-4 bg-slate-900/50 rounded-lg flex items-center gap-2"
+    @click="onListItemClick"
+  >
     <UiCheckmark :value="props.active" />
     <div class="text-sm" :class="props.active ? 'text-white' : 'text-white/70'">
       {{ truncatedAddressString }}
     </div>
     <div class="text-right flex-1">1.00 $</div>
-  </div>
+  </button>
 </template>
 
 <style scoped></style>

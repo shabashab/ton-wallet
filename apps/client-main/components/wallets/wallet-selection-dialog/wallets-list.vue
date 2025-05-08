@@ -7,6 +7,7 @@ import WalletsListItem from './wallets-list-item.vue'
 /* Props and Emits */
 
 /* Composables */
+const walletSelectionStore = useWalletSelectionStore()
 const walletsStore = useWalletsStore()
 const activeWalletStore = useActiveWalletStore()
 const confirmPassword = usePasswordConfirmation()
@@ -23,7 +24,11 @@ const onCreateNewWalletButtonClick = async () => {
     return
   }
 
-  await walletsStore.generateNextWalletWithMnemonics(password)
+  const createdWallet =
+    await walletsStore.generateNextWalletWithMnemonics(password)
+
+  await activeWalletStore.setActiveWallet(createdWallet)
+  walletSelectionStore.displayWalletSelectionDialog = false
 }
 
 /* Lifecycle Hooks */

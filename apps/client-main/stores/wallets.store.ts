@@ -35,6 +35,8 @@ export const useWalletsStore = defineStore('wallets', () => {
     loadedWallets.value.push(wallet)
 
     await walletsStorage.saveWallets(loadedWallets.value)
+
+    return wallet
   }
 
   const createWalletByIndex = async (

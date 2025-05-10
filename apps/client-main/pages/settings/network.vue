@@ -32,7 +32,7 @@ const radioGroupItems = ref<SettingsRadioGroupItem<NetworkType>[]>([
 
 /* Methods */
 const onSaveButtonClick = async () => {
-  settingsStore.updateCurrentNetwork(temporarySelectedNetwork.value)
+  await settingsStore.updateCurrentNetwork(temporarySelectedNetwork.value)
   await router.push('/settings')
 }
 

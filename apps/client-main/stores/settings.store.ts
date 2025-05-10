@@ -8,8 +8,8 @@ export const useSettingsStore = defineStore('settings', () => {
 
   const currentNetwork = computed(() => networkStore.currentNetwork)
 
-  const updateCurrentNetwork = (currentNetwork: NetworkType) => {
-    networkStore.updateCurrentNetwork(currentNetwork)
+  const updateCurrentNetwork = async (currentNetwork: NetworkType) => {
+    await networkStore.updateCurrentNetwork(currentNetwork)
     saveSettingsToLocalStorage()
   }
 
@@ -24,7 +24,7 @@ export const useSettingsStore = defineStore('settings', () => {
     localStorage.setItem(SETTINGS_LOCAL_STORAGE_KEY, serializedSavedSettings)
   }
 
-  const loadSettingsFromLocalStorage = () => {
+  const loadSettingsFromLocalStorage = async () => {
     const serializedSavedSettings = localStorage.getItem(
       SETTINGS_LOCAL_STORAGE_KEY
     )
@@ -35,7 +35,7 @@ export const useSettingsStore = defineStore('settings', () => {
 
     const savedSettings: SavedSettings = JSON.parse(serializedSavedSettings)
 
-    networkStore.updateCurrentNetwork(savedSettings.currentNetwork)
+    await networkStore.updateCurrentNetwork(savedSettings.currentNetwork)
   }
 
   return {

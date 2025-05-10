@@ -11,6 +11,7 @@ import PasswordConfirmationDialog from '~/components/password/password-confirmat
 /* Composables */
 const walletsStore = useWalletsStore()
 const activeWalletStore = useActiveWalletStore()
+const indexAuthStore = useIndexAuthStore()
 
 /* Refs and Reactive Variables */
 
@@ -19,11 +20,13 @@ const activeWalletStore = useActiveWalletStore()
 /* Methods */
 
 /* Lifecycle Hooks */
+await indexAuthStore.tryAuthenticate()
+
 if (walletsStore.loadedWallets.length === 0) {
   await navigateTo('/setup')
 }
 
-if (!activeWalletStore.activeWallet) {
+if (!activeWalletStore.activeWallet && walletsStore.loadedWallets.length > 0) {
   await activeWalletStore.setActiveWallet(walletsStore.loadedWallets[0])
 }
 </script>

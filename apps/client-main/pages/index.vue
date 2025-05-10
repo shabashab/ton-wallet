@@ -2,12 +2,21 @@
 import ActionButton from '~/components/home/action-buttons/action-button.vue'
 import ReceiveFundsDialog from '~/components/home/receive-funds-dialog.vue'
 import TokenBalancesList from '~/components/home/token-balances-list.vue'
+import { useIntervalFn } from '@vueuse/core'
 
 /* Models */
 
 /* Props and Emits */
 
 /* Composables */
+const activeWalletStore = useActiveWalletStore()
+const networkStore = useNetworkStore()
+
+useIntervalFn(() => {
+  activeWalletStore.reloadWalletData().catch((error: unknown) => {
+    console.error('Error happened while trying to reload wallet data', error)
+  })
+}, 5000)
 
 /* Refs and Reactive Variables */
 const displayReceiveDialog = ref(false)
@@ -28,9 +37,19 @@ const onReceiveButtonClick = () => {
 
     <!-- Balance -->
     <div class="flex flex-col items-center gap-2 py-8">
-      <div class="flex flex-row items-end gap-1">
-        <span class="text-white font-bold text-5xl">100.34</span>
-        <span class="text-white font-medium opacity-50 text-3xl">$</span>
+      <div
+        v-if="activeWalletStore.activeWalletFungibleAssets"
+        class="flex flex-row items-end gap-1"
+      >
+        <span class="text-white font-bold text-5xl">{{
+          (networkStore.currentNetwork === 'mainnet'
+            ? activeWalletStore.activeWalletFungibleAssets.statistics.totalUsd
+            : activeWalletStore.activeWalletTonBalance
+          )?.toFixed(2)
+        }}</span>
+        <span class="text-white font-medium opacity-50 text-3xl">
+          {{ networkStore.currentNetwork === 'mainnet' ? '$' : 'TON' }}
+        </span>
       </div>
       <div class="text-white/70">Your balance</div>
     </div>

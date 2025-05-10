@@ -7,6 +7,7 @@ import { calculateWalletAddress } from '~/utils/wallet-address'
 export const useActiveWalletStore = defineStore('active-wallet', () => {
   const serverIndexApi = useServerIndexApi()
   const networkStore = useNetworkStore()
+  const transactionsStore = useTransactionsStore()
 
   const activeWallet = ref<LoadedWallet>()
   const activeWalletAddress = ref<Address>()
@@ -17,6 +18,7 @@ export const useActiveWalletStore = defineStore('active-wallet', () => {
     activeWalletAddress.value = calculateWalletAddress(wallet.publicKey)
     activeWalletFungibleAssets.value = undefined
 
+    transactionsStore.resetTransactions()
     await reloadWalletData()
   }
 

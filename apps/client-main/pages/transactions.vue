@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import TransactionsList from '~/components/transactions/transactions-list.vue'
+
 /* Models */
 
 /* Props and Emits */
@@ -15,7 +17,9 @@
 </script>
 
 <template>
-  <div></div>
+  <div>
+    <TransactionsList />
+  </div>
 </template>
 
 <style scoped></style>

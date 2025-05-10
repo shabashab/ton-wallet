@@ -57,6 +57,9 @@ importers:
       '@tailwindcss/vite':
         specifier: ~4.1.4
         version: 4.1.4(vite@6.2.2(@types/node@22.14.1)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1))
+      '@ton-api/client':
+        specifier: ~0.4.0
+        version: 0.4.0(@ton/core@0.60.1(@ton/crypto@3.3.0))
       '@ton/core':
         specifier: ~0
         version: 0.60.1(@ton/crypto@3.3.0)
@@ -2206,6 +2209,11 @@ packages:
 
   '@ton-api/client@0.2.0':
     resolution: {integrity: sha512-m/T8Nroq4rghUcg72Bbt2He9x5g9RlrP4F9rs7J4DVYLMHnKQTlKDo9JMD/feLXtHxOMh/YGJNcb+BGBkNbNug==}
+    peerDependencies:
+      '@ton/core': '>=0.59.0'
+
+  '@ton-api/client@0.4.0':
+    resolution: {integrity: sha512-k3d6RzNWRDEZpVa9Gig2kHqp74tGvaK/imkjb08RIGxn+wKC7Yv5g98GnXEHf3srRkjtRCG0Nnjx8EsasOMJkw==}
     peerDependencies:
       '@ton/core': '>=0.59.0'
 
@@ -9736,6 +9744,11 @@ snapshots:
   '@telegram-apps/types@2.0.0': {}
 
   '@ton-api/client@0.2.0(@ton/core@0.60.1(@ton/crypto@3.3.0))':
+    dependencies:
+      '@ton/core': 0.60.1(@ton/crypto@3.3.0)
+      core-js-pure: 3.41.0
+
+  '@ton-api/client@0.4.0(@ton/core@0.60.1(@ton/crypto@3.3.0))':
     dependencies:
       '@ton/core': 0.60.1(@ton/crypto@3.3.0)
       core-js-pure: 3.41.0

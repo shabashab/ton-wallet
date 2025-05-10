@@ -13,6 +13,8 @@ import { SwaggerPlugin } from './plugins/swagger.plugin'
 import { UserSelect } from '@database/schema'
 import { Config } from '@config'
 
+import cors from '@fastify/cors'
+
 declare module 'fastify' {
   interface FastifyRequest {
     user?: UserSelect | null
@@ -36,6 +38,10 @@ export const Server = defineProvider(async (injector) => {
 
   const fastify = await Fastify({
     loggerInstance: logger,
+  })
+
+  fastify.register(cors, {
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
   })
 
   fastify.setValidatorCompiler(zodSchemaCompiler)

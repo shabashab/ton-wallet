@@ -101,7 +101,7 @@ export const FungibleAssetsService = defineProvider(async (injector) => {
             : undefined,
           priceUsd: price ? Number.parseFloat(price.price) : undefined,
           meta: {
-            symbol: meta.name,
+            symbol: meta.symbol,
             displayName: meta.name,
             imageUrl: meta.image,
             decimals: meta.extra.decimals

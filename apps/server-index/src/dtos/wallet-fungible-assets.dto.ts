@@ -64,11 +64,13 @@ const walletFungibleAssetJettonDto = defineDto(
   walletFungibleAssetBaseDto.schema.extend({
     type: z.literal('jetton'),
     contractAddress: z.string(),
+    walletAddress: z.string(),
   }),
   (walletFungibleAssetJetton: WalletFungibleAssetJetton) => ({
     ...walletFungibleAssetBaseDto(walletFungibleAssetJetton),
     type: walletFungibleAssetJetton.type,
     contractAddress: walletFungibleAssetJetton.contractAddress,
+    walletAddress: walletFungibleAssetJetton.walletAddress,
   })
 )
 

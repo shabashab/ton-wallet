@@ -73,8 +73,11 @@ export const FungibleAssetsService = defineProvider(async (injector) => {
       ...walletJettonsResponse.jetton_wallets.flatMap((wallet) => {
         const meta =
           walletJettonsResponse.metadata[wallet.jetton]?.token_info[0]
-        const parsedAddress = Address.parse(wallet.jetton)
-        const userFriendlyAddress = parsedAddress.toString()
+        const jettonParsedAddress = Address.parse(wallet.jetton)
+        const jettonUserFriendlyAddress = jettonParsedAddress.toString()
+
+        const walletParsedAddress = Address.parse(wallet.address)
+        const walletUserFriendlyAddress = walletParsedAddress.toString()
 
         if (!meta) {
           return []
@@ -88,12 +91,13 @@ export const FungibleAssetsService = defineProvider(async (injector) => {
           (price) =>
             price.type === 'jetton' &&
             price.contractAddress &&
-            Address.parse(price.contractAddress).equals(parsedAddress)
+            Address.parse(price.contractAddress).equals(jettonParsedAddress)
         )
 
         return {
           type: 'jetton',
-          contractAddress: userFriendlyAddress,
+          contractAddress: jettonUserFriendlyAddress,
+          walletAddress: walletUserFriendlyAddress,
           balanceRaw: wallet.balance,
           balance: balanceDecimal.toNumber(),
           balanceUsd: price

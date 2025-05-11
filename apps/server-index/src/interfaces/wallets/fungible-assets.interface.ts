@@ -37,5 +37,7 @@ export interface WalletFungibleAssetTon extends WalletFungibleAssetBase {
 
 export interface WalletFungibleAssetJetton extends WalletFungibleAssetBase {
   type: 'jetton'
+
   contractAddress: string
+  walletAddress: string
 }

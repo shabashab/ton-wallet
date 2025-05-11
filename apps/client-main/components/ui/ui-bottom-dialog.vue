@@ -44,7 +44,7 @@ const props = defineProps<{
         </DialogOverlay>
 
         <DialogContent
-          class="fixed inset-x-0 bg-slate-800 text-white font-main rounded-t-lg"
+          class="fixed inset-x-0 bg-slate-800 text-white font-main rounded-t-lg max-h-screen"
           :class="props.contentClass"
           as-child
         >

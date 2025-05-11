@@ -3,6 +3,7 @@ import ActionButton from '~/components/home/action-buttons/action-button.vue'
 import ReceiveFundsDialog from '~/components/home/receive-funds-dialog.vue'
 import TokenBalancesList from '~/components/home/token-balances-list.vue'
 import { useIntervalFn } from '@vueuse/core'
+import SendFundsDialog from '~/components/home/send-funds-dialog.vue'
 
 /* Models */
 
@@ -20,6 +21,7 @@ useIntervalFn(() => {
 
 /* Refs and Reactive Variables */
 const displayReceiveDialog = ref(false)
+const displaySendDialog = ref(false)
 
 /* Computed Properties */
 
@@ -28,12 +30,17 @@ const onReceiveButtonClick = () => {
   displayReceiveDialog.value = true
 }
 
+const onSendButtonClick = () => {
+  displaySendDialog.value = true
+}
+
 /* Lifecycle Hooks */
 </script>
 
 <template>
   <div class="flex flex-col items-stretch gap-4">
     <ReceiveFundsDialog v-model:open="displayReceiveDialog" />
+    <SendFundsDialog v-model:open="displaySendDialog" />
 
     <!-- Balance -->
     <div class="flex flex-col items-center gap-2 py-8">
@@ -59,6 +66,7 @@ const onReceiveButtonClick = () => {
       <ActionButton
         label="Send"
         icon="material-symbols:arrow-upward-alt-rounded"
+        @click="onSendButtonClick"
       />
       <ActionButton
         label="Receive"

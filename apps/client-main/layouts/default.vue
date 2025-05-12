@@ -39,7 +39,7 @@ if (!activeWalletStore.activeWallet && walletsStore.loadedWallets.length > 0) {
 
     <AppHeader />
 
-    <div class="px-4">
+    <div class="px-4 pb-18">
       <slot />
     </div>
 

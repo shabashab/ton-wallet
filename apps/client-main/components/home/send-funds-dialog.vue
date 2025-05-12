@@ -9,7 +9,7 @@ import UiButton from '../ui/ui-button.vue'
 import { Decimal } from 'decimal.js'
 import useVuelidate from '@vuelidate/core'
 import { helpers, required } from '@vuelidate/validators'
-import { Address } from '@ton/core'
+import { Address, beginCell, internal, toNano } from '@ton/core'
 
 interface SendFundsDialogOption extends UiSelectOption<string> {
   asset: ServerIndexWalletFungibleAsset
@@ -22,6 +22,7 @@ const open = defineModel<boolean>('open', { required: true })
 
 /* Composables */
 const activeWalletStore = useActiveWalletStore()
+const sendTransaction = useTransactionSend()
 
 /* Refs and Reactive Variables */
 const formData = ref({
@@ -140,12 +141,100 @@ const onPercentageAvailableBalanceButtonClick = (percentage: number) => {
     .toString()
 }
 
-const onSendButtonClick = () => {
+const onSendButtonClick = async () => {
   vuelidate.value.$touch()
 
   if (vuelidate.value.$error) {
     return
   }
+
+  if (!selectedAsset.value) {
+    return
+  }
+
+  const sendAmount = BigInt(
+    new Decimal(formData.value.sendAmount)
+      .mul(new Decimal(10).pow(selectedAsset.value.meta.decimals))
+      .floor()
+      .toString()
+  )
+  const recipientAddress = Address.parse(formData.value.recipientAddressString)
+  const comment =
+    formData.value.comment.length > 0 ? formData.value.comment : undefined
+
+  const transferMessage =
+    selectedAsset.value.type === 'ton'
+      ? createTonTransferMessage(sendAmount, recipientAddress, comment)
+      : createJettonTransferMessage(
+          sendAmount,
+          Address.parse(selectedAsset.value.walletAddress),
+          recipientAddress,
+          comment
+        )
+
+  const result = await sendTransaction({ message: transferMessage })
+  console.log('sendTransaction result', result)
+}
+
+const createTonTransferMessage = (
+  amount: bigint,
+  to: Address,
+  comment?: string
+) => {
+  const ownAddress = activeWalletStore.activeWalletAddress
+
+  if (!ownAddress) {
+    throw new Error(
+      'Could not create ton transfer message. No active wallet available'
+    )
+  }
+
+  const body = comment
+    ? beginCell().storeUint(0, 32).storeStringTail(comment).endCell()
+    : undefined
+
+  return internal({
+    to,
+    value: amount,
+    body,
+  })
+}
+
+const createJettonTransferMessage = (
+  amount: bigint,
+  walletAddress: Address,
+  to: Address,
+  comment?: string
+) => {
+  const ownAddress = activeWalletStore.activeWalletAddress
+
+  if (!ownAddress) {
+    throw new Error(
+      'Could not create jetton transfer message. No active wallet available'
+    )
+  }
+
+  const payload = comment
+    ? beginCell().storeUint(0, 32).storeStringTail(comment).endCell()
+    : undefined
+
+  const body = beginCell()
+    .storeUint(0xf_8a_7e_a5, 32) // transfer operation
+    .storeUint(0, 64) // op, queryId
+    .storeCoins(amount)
+    .storeAddress(to)
+    .storeAddress(ownAddress)
+    // eslint-disable-next-line unicorn/no-useless-undefined
+    .storeMaybeRef(undefined)
+    .storeCoins(comment ? 1 : 0)
+    .storeMaybeRef(payload)
+    .endCell()
+
+  return internal({
+    to: walletAddress,
+    body,
+    value: toNano('0.101'),
+  })
 }
 
 /* Lifecycle Hooks */

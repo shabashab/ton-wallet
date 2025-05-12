@@ -5,9 +5,6 @@ import {
   mnemonicToHDSeed,
 } from '@ton/crypto'
 
-import AES from 'crypto-js/aes'
-import SHA256 from 'crypto-js/sha256'
-
 const LAST_WALLET_INDEX_CLOUD_STORAGE_KEY = 'last-wallet-index'
 
 export const useWalletsStore = defineStore('wallets', () => {
@@ -66,17 +63,6 @@ export const useWalletsStore = defineStore('wallets', () => {
       publicKey: keypair.publicKey,
       encryptedSecretKey: encryptSecretKey(keypair.secretKey, password),
     }
-  }
-
-  const encryptSecretKey = (secretKey: Buffer, password: string): string => {
-    const secretKeyBase64 = secretKey.toString('base64')
-
-    const passwordDigest = SHA256(password)
-    const encryptedSecretKey = AES.encrypt(secretKeyBase64, passwordDigest, {
-      iv: SHA256(passwordDigest),
-    }).toString()
-
-    return encryptedSecretKey
   }
 
   const getCloudStorageLastWalletIndex = async (): Promise<

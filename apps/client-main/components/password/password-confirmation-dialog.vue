@@ -97,6 +97,7 @@ watch(enteredPassword, () => {
   <UiBottomDialog
     title="Enter password"
     description="Enter password to unlock you wallet and continue with action"
+    content-class="z-10"
     :open="displayDialog"
     @update:open="onDialogOpenStateChange"
   >

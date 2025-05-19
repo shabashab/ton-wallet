@@ -2,8 +2,8 @@
 import ActionButton from '~/components/home/action-buttons/action-button.vue'
 import ReceiveFundsDialog from '~/components/home/receive-funds-dialog.vue'
 import TokenBalancesList from '~/components/home/token-balances-list.vue'
-import { useIntervalFn } from '@vueuse/core'
 import SendFundsDialog from '~/components/home/send-funds-dialog.vue'
+import { useIntervalFn } from '@vueuse/core'
 
 /* Models */
 
@@ -12,12 +12,6 @@ import SendFundsDialog from '~/components/home/send-funds-dialog.vue'
 /* Composables */
 const activeWalletStore = useActiveWalletStore()
 const networkStore = useNetworkStore()
-
-useIntervalFn(() => {
-  activeWalletStore.reloadWalletData().catch((error: unknown) => {
-    console.error('Error happened while trying to reload wallet data', error)
-  })
-}, 5000)
 
 /* Refs and Reactive Variables */
 const displayReceiveDialog = ref(false)
@@ -34,7 +28,20 @@ const onSendButtonClick = () => {
   displaySendDialog.value = true
 }
 
+const tryReloadWalletData = () => {
+  activeWalletStore.reloadWalletData().catch((error: unknown) => {
+    console.error('Error happened while trying to reload wallet data', error)
+  })
+}
+
 /* Lifecycle Hooks */
+useIntervalFn(() => {
+  tryReloadWalletData()
+}, 5000)
+
+onMounted(() => {
+  tryReloadWalletData()
+})
 </script>
 
 <template>

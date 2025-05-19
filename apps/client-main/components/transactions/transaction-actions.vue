@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import type { Action } from '@ton-api/client'
+import TransactionAction from './transaction-actions/transaction-action.vue'
 
 /* Models */
 
 /* Props and Emits */
 const props = defineProps<{
-  action: Action
+  actions: Action[]
 }>()
 
 /* Composables */
@@ -20,13 +21,12 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="flex justify-between items-center text-sm">
-    <span>
-      {{ props.action.simplePreview.name }}
-    </span>
-    <span class="font-semibold uppercase">
-      {{ props.action.simplePreview.value }}
-    </span>
+  <div class="space-y-2">
+    <TransactionAction
+      v-for="(action, index) of props.actions"
+      :key="index"
+      :action
+    />
   </div>
 </template>
 

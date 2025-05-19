@@ -44,6 +44,42 @@ export const useTransactionsStore = defineStore('transactions', () => {
     return transactions
   }
 
+  const fetchNewestTransactions = async () => {
+    if (!activeWalletStore.activeWalletAddress) {
+      throw new Error(
+        'Cannot fetch current active wallet newest transactions. No active wallet address available'
+      )
+    }
+
+    const newestTransactionTimestamp = transactions.value?.[0].timestamp
+
+    const latestEvents = await tonApi.value.accounts.getAccountEvents(
+      activeWalletStore.activeWalletAddress,
+      {
+        limit: TRANSACTIONS_PER_PAGE,
+        start_date: newestTransactionTimestamp,
+      }
+    )
+
+    if (latestEvents.events.length === 0) {
+      return
+    }
+
+    if (!transactions.value) {
+      transactions.value = latestEvents.events
+      nextTransactionsBeforeLt.value = BigInt(latestEvents.nextFrom)
+      return
+    }
+
+    const dedupedEvents = latestEvents.events.filter(
+      (x) => !transactions.value?.some((y) => x.eventId === y.eventId)
+    )
+
+    for (const dedupedEvent of dedupedEvents.reverse()) {
+      transactions.value.unshift(dedupedEvent)
+    }
+  }
+
   const resetTransactions = () => {
     transactions.value = undefined
     nextTransactionsBeforeLt.value = undefined
@@ -58,6 +94,7 @@ export const useTransactionsStore = defineStore('transactions', () => {
   return {
     transactions,
     canLoadMore,
+    fetchNewestTransactions,
 
     loadNextTransactions,
     resetTransactions,

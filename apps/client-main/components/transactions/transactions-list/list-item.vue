@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { AccountEvent } from '@ton-api/client'
-import ListItemAction from './list-item-action.vue'
+import TransactionActions from '../transaction-actions.vue'
 
 /* Models */
 
@@ -40,21 +40,18 @@ const truncatedTransactionId = computed(() => {
 
 <template>
   <div
-    class="flex flex-col items-stretch gap-4 px-4 py-3 bg-white/10 rounded-xl"
+    class="flex flex-col items-stretch gap-2 px-4 py-3 bg-white/10 rounded-xl"
   >
+    <TransactionActions :actions="props.transaction.actions" />
+    <div class="h-[1px] bg-slate-400/50 w-full"></div>
     <div class="flex flex-row justify-between items-center">
-      <div class="text-sm opacity-50">
+      <div class="text-xs opacity-50">
         {{ formattedTimestamp }}
       </div>
-      <div class="text-sm opacity-50">
+      <div class="text-xs opacity-50">
         {{ truncatedTransactionId }}
       </div>
     </div>
-    <ListItemAction
-      v-for="(action, index) in props.transaction.actions"
-      :key="index"
-      :action
-    />
   </div>
 </template>
 

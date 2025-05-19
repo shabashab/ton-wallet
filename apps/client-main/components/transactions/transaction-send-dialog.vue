@@ -16,6 +16,7 @@ import UiBottomDialog from '../ui/ui-bottom-dialog.vue'
 import UiButton from '../ui/ui-button.vue'
 import type { SendTransactionData } from '~/types/send-transaction-data.type'
 import { sleep } from 'radash'
+import TransactionActions from './transaction-actions.vue'
 
 /* Models */
 
@@ -173,9 +174,9 @@ watch(
     <div class="pt-8 pb-2 space-y-4">
       <div v-if="emulatedEvent">
         Transaction details:<br />
-        actions count {{ emulatedEvent.actions.length }}
+        <TransactionActions :actions="emulatedEvent.actions" />
         <UiButton class="w-full" @click="onApproveButtonClick"
-          >Approve
+          >Confirm transaction
         </UiButton>
       </div>
     </div>

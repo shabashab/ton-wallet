@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useInfiniteScroll } from '@vueuse/core'
+import { useInfiniteScroll, useIntervalFn } from '@vueuse/core'
 import ListItem from './transactions-list/list-item.vue'
 import TransactionDetailsDialog from './transaction-details-dialog.vue'
 import type { AccountEvent } from '@ton-api/client'
@@ -37,7 +37,20 @@ const onTransactionItemClick = (item: AccountEvent) => {
   transactionDetailsDialogTransaction.value = item
 }
 
+const tryFetchNewestTransactions = () => {
+  transactionsStore.fetchNewestTransactions().catch((error: unknown) => {
+    console.error(error)
+  })
+}
+
 /* Lifecycle Hooks */
+useIntervalFn(() => {
+  tryFetchNewestTransactions()
+}, 5000)
+
+onMounted(() => {
+  tryFetchNewestTransactions()
+})
 </script>
 
 <template>

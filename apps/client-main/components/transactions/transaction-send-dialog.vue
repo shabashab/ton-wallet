@@ -4,6 +4,7 @@ import { mnemonicNew, mnemonicToPrivateKey } from '@ton/crypto'
 import {
   beginCell,
   external,
+  fromNano,
   SendMode,
   storeMessage,
   WalletContractV5R1,
@@ -17,6 +18,7 @@ import UiButton from '../ui/ui-button.vue'
 import type { SendTransactionData } from '~/types/send-transaction-data.type'
 import { sleep } from 'radash'
 import TransactionActions from './transaction-actions.vue'
+import UiSkeleton from '../ui/ui-skeleton.vue'
 
 /* Models */
 
@@ -34,6 +36,7 @@ const tonClient = useTonClient()
 
 /* Refs and Reactive Variables */
 const emulatedEvent = ref<Event | undefined>()
+const estimatedFee = ref<number | undefined>()
 
 /* Computed Properties */
 const displayDialog = computed(
@@ -113,6 +116,29 @@ const calculateEmulatedEvent = async () => {
     },
     { ignore_signature_check: true }
   )
+
+  await sleep(2000)
+
+  const feeEstimationResult = await tonClient.value.estimateExternalMessageFee(
+    openedActiveWallet.value.address,
+    {
+      body: externalMessage.body,
+      // eslint-disable-next-line unicorn/no-null
+      initCode: externalMessage.init?.code ?? null,
+      // eslint-disable-next-line unicorn/no-null
+      initData: externalMessage.init?.data ?? null,
+      ignoreSignature: true,
+    }
+  )
+
+  estimatedFee.value = Number(
+    fromNano(
+      feeEstimationResult.source_fees.fwd_fee +
+        feeEstimationResult.source_fees.gas_fee +
+        feeEstimationResult.source_fees.in_fwd_fee +
+        feeEstimationResult.source_fees.storage_fee
+    )
+  )
 }
 
 const onApproveButtonClick = async () => {
@@ -157,6 +183,7 @@ watch(
   async (newSigningMessage) => {
     if (!newSigningMessage) {
       emulatedEvent.value = undefined
+      estimatedFee.value = undefined
       return
     }
 
@@ -172,9 +199,18 @@ watch(
     @update:open="onDialogOpenStateChange"
   >
     <div class="pt-8 pb-2 space-y-4">
-      <div v-if="emulatedEvent">
-        Transaction details:<br />
+      <div v-if="emulatedEvent" class="flex flex-col items-stretch gap-4">
+        <span class="text-sm opacity-70"> Transaction actions: </span>
         <TransactionActions :actions="emulatedEvent.actions" />
+        <div class="flex justify-between items-center rounded-md">
+          <span class="text-sm opacity-70"> Estimated fee: </span>
+          <UiSkeleton
+            skeleton-class="h-[10px] w-[80px]"
+            :loading="typeof estimatedFee !== 'number'"
+          >
+            <span class="text-sm font-semibold">{{ estimatedFee }} TON</span>
+          </UiSkeleton>
+        </div>
         <UiButton class="w-full" @click="onApproveButtonClick"
           >Confirm transaction
         </UiButton>

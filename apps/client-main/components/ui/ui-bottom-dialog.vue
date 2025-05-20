@@ -34,7 +34,7 @@ const props = defineProps<{
 <template>
   <DialogRoot v-model:open="open">
     <DialogPortal>
-      <AnimatePresence multiple>
+      <AnimatePresence>
         <DialogOverlay class="bg-black/10 fixed inset-0" as-child>
           <Motion
             :initial="{ opacity: 0 }"

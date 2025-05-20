@@ -2,6 +2,7 @@
 import UiBottomDialog from '../ui/ui-bottom-dialog.vue'
 import UiButton from '../ui/ui-button.vue'
 import WalletQrCode from './receive-dialog/wallet-qr-code.vue'
+import copy from 'copy-to-clipboard'
 
 /* Models */
 const open = defineModel<boolean>('open', { required: true })
@@ -10,12 +11,24 @@ const open = defineModel<boolean>('open', { required: true })
 
 /* Composables */
 const activeWalletStore = useActiveWalletStore()
+const { toast } = useToast()
 
 /* Refs and Reactive Variables */
 
 /* Computed Properties */
 
 /* Methods */
+const onCopyAddressButtonClick = () => {
+  if (!activeWalletStore.activeWalletAddressString) {
+    return
+  }
+
+  copy(activeWalletStore.activeWalletAddressString)
+  toast({
+    title: 'Copied successfully',
+    description: 'Wallet address has been copied to clipboard',
+  })
+}
 
 /* Lifecycle Hooks */
 </script>
@@ -35,7 +48,7 @@ const activeWalletStore = useActiveWalletStore()
         >
           {{ activeWalletStore.activeWalletAddressString }}
         </span>
-        <UiButton>Copy Address</UiButton>
+        <UiButton @click="onCopyAddressButtonClick">Copy Address</UiButton>
       </div>
     </div>
   </UiBottomDialog>

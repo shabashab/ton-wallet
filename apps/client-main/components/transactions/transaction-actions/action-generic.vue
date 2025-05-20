@@ -11,6 +11,24 @@ const valueVariants = cva('', {
   },
 })
 
+const titleVariants = cva('', {
+  variants: {
+    titleStyle: {
+      default: 'text-white',
+      failed: 'text-red-400',
+    },
+  },
+})
+
+const iconVariants = cva('grid place-items-center', {
+  variants: {
+    iconStyle: {
+      default: '',
+      failed: 'text-red-400',
+    },
+  },
+})
+
 /* Models */
 
 /* Props and Emits */
@@ -18,6 +36,7 @@ const props = defineProps<{
   title: string
   value?: string
   icon?: string
+  failed?: boolean
   valueVariant?: VariantProps<typeof valueVariants>['valueStyle']
 }>()
 
@@ -34,11 +53,18 @@ const props = defineProps<{
 
 <template>
   <div class="flex flex-row items-center text-sm font-semibold gap-2">
-    <div v-if="props.icon" class="grid place-items-center">
-      <Icon :name="props.icon" />
+    <div
+      v-if="props.icon || props.failed"
+      :class="iconVariants({ iconStyle: props.failed ? 'failed' : 'default' })"
+    >
+      <Icon :name="props.failed ? 'mingcute:warning-fill' : props.icon" />
     </div>
-    <div>
-      {{ props.title }}
+    <div
+      :class="
+        titleVariants({ titleStyle: props.failed ? 'failed' : 'default' })
+      "
+    >
+      {{ props.title }} {{ props.failed ? '(fail)' : undefined }}
     </div>
     <div class="flex-1"></div>
     <div :class="valueVariants({ valueStyle: props.valueVariant })">

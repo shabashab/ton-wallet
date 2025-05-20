@@ -8,6 +8,7 @@ import Decimal from 'decimal.js'
 /* Props and Emits */
 const props = defineProps<{
   action: JettonTransferAction
+  failed?: boolean
 }>()
 
 /* Composables */
@@ -44,6 +45,7 @@ const direction = computed<'receive' | 'send'>(() => {
     :amount
     :currency="props.action.jetton.symbol"
     :direction
+    :failed="props.failed"
   />
 </template>
 

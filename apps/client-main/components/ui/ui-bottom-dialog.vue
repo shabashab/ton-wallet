@@ -17,7 +17,9 @@ const open = defineModel<boolean>('open', { required: true })
 const props = defineProps<{
   title?: string
   description?: string
+
   contentClass?: string
+  overlayClass?: string
 }>()
 
 /* Composables */
@@ -35,7 +37,11 @@ const props = defineProps<{
   <DialogRoot v-model:open="open">
     <DialogPortal>
       <AnimatePresence>
-        <DialogOverlay class="bg-black/10 fixed inset-0" as-child>
+        <DialogOverlay
+          :class="props.overlayClass"
+          class="bg-black/10 fixed inset-0"
+          as-child
+        >
           <Motion
             :initial="{ opacity: 0 }"
             :exit="{ opacity: 0 }"

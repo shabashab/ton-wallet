@@ -9,6 +9,7 @@ import ActionGenericTransfer from './action-generic-transfer.vue'
 /* Props and Emits */
 const props = defineProps<{
   action: TonTransferAction
+  failed?: boolean
 }>()
 
 /* Composables */
@@ -39,7 +40,12 @@ const direction = computed<'receive' | 'send'>(() => {
 </script>
 
 <template>
-  <ActionGenericTransfer :amount currency="TON" :direction />
+  <ActionGenericTransfer
+    :failed="props.failed"
+    :amount
+    currency="TON"
+    :direction
+  />
   <!-- <div>
     {{ { amount, direction } }}
   </div> -->

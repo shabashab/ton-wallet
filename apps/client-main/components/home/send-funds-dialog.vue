@@ -173,7 +173,10 @@ const onSendButtonClick = async () => {
         )
 
   const result = await sendTransaction({ message: transferMessage })
-  console.log('sendTransaction result', result)
+
+  if (result) {
+    open.value = false
+  }
 }
 
 const createTonTransferMessage = (

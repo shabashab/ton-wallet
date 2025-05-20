@@ -34,6 +34,8 @@ const confirmPassword = usePasswordConfirmation()
 const tonApi = useTonApi()
 const tonClient = useTonClient()
 
+const { toast } = useToast()
+
 /* Refs and Reactive Variables */
 const emulatedEvent = ref<Event | undefined>()
 const estimatedFee = ref<number | undefined>()
@@ -91,6 +93,8 @@ const createExternalMessageCell = (message: Message) => {
 }
 
 const calculateEmulatedEvent = async () => {
+  console.log('calculateEmulatedEvent')
+
   if (!openedActiveWallet.value) {
     return
   }
@@ -175,6 +179,15 @@ const onApproveButtonClick = async () => {
   await sleep(2000)
 
   await tonClient.value.sendMessage(externalMessage)
+
+  const externalMessageCell = createExternalMessageCell(externalMessage)
+  const externalMessageCellHash = externalMessageCell.hash().toString('hex')
+
+  toast({
+    title: 'Transaction sent',
+    description: 'Transaction has been successfully sent to blockchain',
+  })
+  transactionSendInjection.submitSendResult(externalMessageCellHash)
 }
 
 /* Lifecycle Hooks */
@@ -195,6 +208,8 @@ watch(
 <template>
   <UiBottomDialog
     title="Confirm transaction"
+    content-class="z-[40]"
+    overlay-class="z-[39]"
     :open="displayDialog"
     @update:open="onDialogOpenStateChange"
   >

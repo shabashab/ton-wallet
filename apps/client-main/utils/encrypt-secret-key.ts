@@ -31,7 +31,5 @@ export const decryptSecretKey = (
 
   const secretKeyBase64 = decrypted.toString(CryptoJS.enc.Utf8)
 
-  console.log({ secretKeyBase64 })
-
   return Buffer.from(secretKeyBase64, 'base64')
 }

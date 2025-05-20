@@ -8,6 +8,7 @@ const props = defineProps<{
   amount: number
   direction: 'receive' | 'send'
   currency: string
+  failed?: boolean
 }>()
 
 /* Composables */
@@ -16,7 +17,7 @@ const props = defineProps<{
 
 /* Computed Properties */
 const title = computed(() => {
-  return props.direction === 'receive' ? 'Received' : 'Sent'
+  return props.direction === 'receive' ? 'Receive' : 'Send'
 })
 
 const value = computed(() => {
@@ -38,6 +39,7 @@ const value = computed(() => {
         : 'material-symbols:arrow-upward-rounded'
     "
     :value-variant="props.direction === 'receive' ? 'success' : 'error'"
+    :failed="props.failed"
   />
 </template>
 

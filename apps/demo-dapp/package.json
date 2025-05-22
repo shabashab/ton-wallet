@@ -1,0 +1,25 @@
+{
+  "name": "demo-dapp",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "eslint --ext .ts,.vue src"
+  },
+  "dependencies": {
+    "@tonconnect/ui": "~2.1.0",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@inc-dev/eslint-config-vue": "~2.0.0",
+    "@vitejs/plugin-vue": "^5.2.3",
+    "@vue/tsconfig": "^0.7.0",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "~8.32.1",
+    "vite": "^6.3.5",
+    "vue-tsc": "^2.2.8"
+  }
+}

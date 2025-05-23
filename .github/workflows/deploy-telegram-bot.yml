@@ -1,0 +1,21 @@
+name: Deploy Telegram Bot Production
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'apps/telegram-bot/**'
+      - 'infra/telegram-bot/**'
+      - '.github/workflows/deploy-telegram-bot.yml'
+
+jobs:
+  deploy:
+    name: Deploy production telegram-bot
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy -c infra/telegram-bot/fly.toml  --dockerfile infra/telegram-bot/Dockerfile
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

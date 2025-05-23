@@ -1,0 +1,17 @@
+# fly.toml app configuration file generated for lumina-stage-web on 2024-03-26T12:59:29+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'bachelors-ton-wallet-telegram-bot'
+primary_region = 'waw'
+
+[env]
+  TELEGRAM_ENVIRONMENT = 'production'
+  TELEGRAM_MINI_APP_URL = 'https://telegram-mini-app.local'
+
+[[vm]]
+  memory = '512mb'
+  cpu_kind = 'shared'
+  cpus = 1
+

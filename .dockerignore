@@ -1,0 +1,9 @@
+node_modules/
+dist/
+**/dist
+**/node_modules
+.env
+**/.env
+.dockerignore
+.husky
+.gitignore

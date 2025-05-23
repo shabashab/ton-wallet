@@ -1,0 +1,38 @@
+# fly.toml app configuration file generated for lumina-stage-web on 2024-03-26T12:59:29+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'bachelors-ton-wallet-index'
+primary_region = 'waw'
+
+[env]
+  PORT = '3000'
+
+  ENVIRONMENT = 'production'
+  REDIS_IP_FAMILY = '6'
+
+  ENABLE_SWAGGER = 'true'
+  ENABLE_BULL_BOARD = 'true'
+
+  MAIL_FROM = 'template@mail.com'
+  SMTP_HOST = 'localhost'
+  SMTP_PORT = '1025'
+  SMTP_SECURE = 'false'
+  SMTP_USERNAME = 'test'
+  SMTP_PASSWORD = 'test'
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = false
+  auto_start_machines = false
+  min_machines_running = 1
+  max_machines_running = 1
+  processes = ['app']
+
+[[vm]]
+  memory = '512mb'
+  cpu_kind = 'shared'
+  cpus = 1
+

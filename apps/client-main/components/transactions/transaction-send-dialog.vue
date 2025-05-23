@@ -75,7 +75,9 @@ const createExternalMessageSignedWithSecretKey = async (
   const seqno = await activeWallet.getSeqno()
 
   const transfer = activeWallet.createTransfer({
-    messages: [sendData.message],
+    messages: Array.isArray(sendData.message)
+      ? sendData.message
+      : [sendData.message],
     secretKey,
     sendMode: SendMode.PAY_GAS_SEPARATELY + SendMode.IGNORE_ERRORS,
     seqno,
@@ -181,13 +183,14 @@ const onApproveButtonClick = async () => {
   await tonClient.value.sendMessage(externalMessage)
 
   const externalMessageCell = createExternalMessageCell(externalMessage)
-  const externalMessageCellHash = externalMessageCell.hash().toString('hex')
 
   toast({
     title: 'Transaction sent',
     description: 'Transaction has been successfully sent to blockchain',
   })
-  transactionSendInjection.submitSendResult(externalMessageCellHash)
+  transactionSendInjection.submitSendResult(
+    externalMessageCell.toBoc().toString('base64')
+  )
 }
 
 /* Lifecycle Hooks */

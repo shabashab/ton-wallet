@@ -4,6 +4,7 @@ import ReceiveFundsDialog from '~/components/home/receive-funds-dialog.vue'
 import TokenBalancesList from '~/components/home/token-balances-list.vue'
 import SendFundsDialog from '~/components/home/send-funds-dialog.vue'
 import { useIntervalFn } from '@vueuse/core'
+import { useTonConnectStore } from '~/stores/ton-connect.store'
 
 /* Models */
 
@@ -12,6 +13,8 @@ import { useIntervalFn } from '@vueuse/core'
 /* Composables */
 const activeWalletStore = useActiveWalletStore()
 const networkStore = useNetworkStore()
+const tonConnectStore = useTonConnectStore()
+// const twa = useTwa()
 
 /* Refs and Reactive Variables */
 const displayReceiveDialog = ref(false)
@@ -26,6 +29,12 @@ const onReceiveButtonClick = () => {
 
 const onSendButtonClick = () => {
   displaySendDialog.value = true
+}
+
+const onScanButtonClick = async () => {
+  await tonConnectStore.handleQrCodeUrl(
+    'tc://?v=2&id=92bd062494ab29723576449b2b135a3b311fc3f87ea04e2c339885a83f3b0470&r=%7B%22manifestUrl%22%3A%22https%3A%2F%2Fdemo-dapp.local%2Ftonconnect-manifest.json%22%2C%22items%22%3A%5B%7B%22name%22%3A%22ton_addr%22%7D%5D%7D&ret=none'
+  )
 }
 
 const tryReloadWalletData = () => {
@@ -79,6 +88,11 @@ onMounted(() => {
         label="Receive"
         icon="material-symbols:arrow-downward-alt-rounded"
         @click="onReceiveButtonClick"
+      />
+      <ActionButton
+        label="Test"
+        icon="material-symbols:arrow-downward-alt-rounded"
+        @click="onScanButtonClick"
       />
     </div>
 

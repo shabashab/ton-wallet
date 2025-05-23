@@ -1,5 +1,5 @@
 import type { MessageRelaxed } from '@ton/core'
 
 export interface SendTransactionData {
-  message: MessageRelaxed
+  message: MessageRelaxed | MessageRelaxed[]
 }

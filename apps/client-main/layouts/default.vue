@@ -4,6 +4,8 @@ import AppHeader from '~/components/app/app-header.vue'
 import WalletSelectionDialog from '~/components/wallets/wallet-selection-dialog.vue'
 import PasswordConfirmationDialog from '~/components/password/password-confirmation-dialog.vue'
 import TransactionSendDialog from '~/components/transactions/transaction-send-dialog.vue'
+import TonConnectDialog from '~/components/ton-connect/ton-connect-dialog.vue'
+import { useIntervalFn } from '@vueuse/core'
 
 /* Models */
 
@@ -13,6 +15,7 @@ import TransactionSendDialog from '~/components/transactions/transaction-send-di
 const walletsStore = useWalletsStore()
 const activeWalletStore = useActiveWalletStore()
 const indexAuthStore = useIndexAuthStore()
+const tonConnectStore = useTonConnectStore()
 
 /* Refs and Reactive Variables */
 
@@ -29,6 +32,17 @@ if (walletsStore.loadedWallets.length === 0) {
 
 if (!activeWalletStore.activeWallet && walletsStore.loadedWallets.length > 0) {
   await activeWalletStore.setActiveWallet(walletsStore.loadedWallets[0])
+
+  useIntervalFn(() => {
+    tonConnectStore.synchronizeTonConnect().catch((error: unknown) => {
+      console.error(error)
+    })
+  }, 10_000)
+
+  // eslint-disable-next-line unicorn/prefer-top-level-await
+  tonConnectStore.synchronizeTonConnect().catch((error: unknown) => {
+    console.error(error)
+  })
 }
 </script>
 
@@ -36,6 +50,7 @@ if (!activeWalletStore.activeWallet && walletsStore.loadedWallets.length > 0) {
   <div class="container font-main bg-slate-900 min-h-screen text-white">
     <!-- Dialogs and other non-visible elements -->
     <WalletSelectionDialog />
+    <TonConnectDialog />
 
     <AppHeader />
 

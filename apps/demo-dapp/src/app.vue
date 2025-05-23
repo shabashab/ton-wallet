@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { TonConnect, TonConnectUI, type Wallet } from '@tonconnect/ui'
+import { CHAIN, TonConnect, TonConnectUI, type Wallet } from '@tonconnect/ui'
+import { toNano } from '@ton/core'
 import { ref } from 'vue'
 
 const connector = new TonConnect({})
@@ -31,6 +32,29 @@ tonConnect.onStatusChange((newWallet) => {
 const onConnectButtonClick = async () => {
   await tonConnect.openModal()
 }
+
+const onSendTestTransactionButtonClick = async () => {
+  if (!wallet.value) return
+
+  const transaction = {
+    address: 'UQAtQgKuoHLLohg13F5O7jd_8M-c-iAwudtR0JgqE8fEGZ4X',
+    amount: toNano('0.5').toString(),
+  }
+
+  const result = await tonConnect.sendTransaction({
+    messages: [transaction],
+    validUntil: Date.now() + 60 * 1000,
+    from: wallet.value.account.address,
+    network: CHAIN.MAINNET,
+  })
+
+  // eslint-disable-next-line no-undef
+  console.log({ result })
+}
+
+const onDisconnectButtonClick = async () => {
+  await tonConnect.disconnect()
+}
 </script>
 
 <template>
@@ -38,7 +62,10 @@ const onConnectButtonClick = async () => {
     <button v-if="!wallet" @click="onConnectButtonClick">Connect</button>
     <div v-else class="connected-account-container">
       {{ wallet.account.address }}
-      <button v-if="!wallet">Disconnect</button>
+      <button @click="onSendTestTransactionButtonClick">
+        Send test transaction
+      </button>
+      <button @click="onDisconnectButtonClick">Disconnect</button>
     </div>
   </div>
 </template>
@@ -46,6 +73,8 @@ const onConnectButtonClick = async () => {
 <style scoped>
 .connected-account-container {
   display: flex;
+  flex-direction: column;
+  gap: 10px;
   align-items: center;
 }
 </style>

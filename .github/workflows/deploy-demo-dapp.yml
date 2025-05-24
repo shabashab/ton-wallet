@@ -1,0 +1,40 @@
+name: Deploy Demo dApp
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'apps/demo-dapp/**'
+      - 'infra/demo-dapp/**'
+      - '.github/workflows/deploy-demo-dapp.yml'
+jobs:
+  deploy:
+    name: Build & Deploy App
+    runs-on: ubuntu-22.04
+    permissions: write-all
+    strategy:
+      matrix:
+        node-version: [22]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          lfs: true
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install --filter "@ton-wallet/demo-dapp..."
+      - name: Build application
+        run: pnpm turbo build --filter="@ton-wallet/demo-dapp..."
+      - name: Deploy to cloudflare
+        uses: cloudflare/wrangler-action@v3
+        id: deploy
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy apps/demo-dapp/dist --project-name=ton-wallet-demo-dapp --branch=${{ github.head_ref || github.ref_name }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}

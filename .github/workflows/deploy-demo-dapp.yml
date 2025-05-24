@@ -39,5 +39,3 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy apps/demo-dapp/dist --project-name=ton-wallet-demo-dapp --branch=${{ github.head_ref || github.ref_name }}
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-          environment: demo dApp production

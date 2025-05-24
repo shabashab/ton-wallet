@@ -12,7 +12,7 @@ const tonConnect = new TonConnectUI({
         name: 'TON Wallet',
         appName: 'TON Wallet',
         aboutUrl: 'https://google.com',
-        bridgeUrl: 'https://bachelors-ton-wallet-bridge.fly.dev/bridge',
+        bridgeUrl: 'https://ton-wallet-bridge.shabashab.dev/bridge',
         imageUrl:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU7Hz0AK6gD_mXh0fv_PLJ6ie1S6mlB-bhrg&s',
         universalLink: 'https://google.com',

@@ -25,6 +25,7 @@
     "@commitlint/config-conventional": "^19.1.0",
     "@inc-dev/eslint-config": "~2.2.0",
     "eslint": "~9.23.0",
-    "turbo": "^2.1.0"
+    "turbo": "^2.1.0",
+    "wrangler": "3.90.0"
   }
 }

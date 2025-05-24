@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt generate",
+    "build": "nuxt generate --dotenv .env.production",
     "dev": "nuxt dev --host 127.0.0.1 --port 13240",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",

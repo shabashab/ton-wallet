@@ -7,6 +7,8 @@ on:
       - 'apps/client-main/**'
       - 'infra/client-main/**'
       - '.github/workflows/deploy-client-main.yml'
+  workflow_dispatch:
+
 jobs:
   deploy:
     name: Build & Deploy App

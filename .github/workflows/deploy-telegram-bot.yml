@@ -8,6 +8,7 @@ on:
       - 'apps/telegram-bot/**'
       - 'infra/telegram-bot/**'
       - '.github/workflows/deploy-telegram-bot.yml'
+  workflow_dispatch:
 
 jobs:
   deploy:

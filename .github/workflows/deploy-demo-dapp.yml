@@ -7,6 +7,8 @@ on:
       - 'apps/demo-dapp/**'
       - 'infra/demo-dapp/**'
       - '.github/workflows/deploy-demo-dapp.yml'
+  workflow_dispatch:
+
 jobs:
   deploy:
     name: Build & Deploy App

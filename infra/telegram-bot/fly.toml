@@ -8,7 +8,7 @@ primary_region = 'waw'
 
 [env]
   TELEGRAM_ENVIRONMENT = 'production'
-  TELEGRAM_MINI_APP_URL = 'https://telegram-mini-app.local'
+  TELEGRAM_MINI_APP_URL = 'https://ton-wallet-client-main.shabashab.dev'
 
 [[vm]]
   memory = '512mb'

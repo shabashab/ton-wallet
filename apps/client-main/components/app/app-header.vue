@@ -23,7 +23,7 @@ const walletSelectionStore = useWalletSelectionStore()
   <div class="text-white flex justify-between p-2 gap-4">
     <CurrentWallet
       v-if="activeWalletStore.activeWalletAddress"
-      name="Wallet Name"
+      :name="`Wallet ${activeWalletStore.activeWallet?.index}`"
       :address="activeWalletStore.activeWalletAddress.toString()"
     />
     <div class="flex-1"></div>

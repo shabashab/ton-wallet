@@ -21,7 +21,14 @@ const props = defineProps<{
 </script>
 
 <template>
-  <UiButton :icon="props.icon">{{ label }}</UiButton>
+  <UiButton>
+    <div class="flex flex-col items-center gap-1">
+      <Icon class="text-3xl" :name="props.icon" />
+      <span class="text-sm">
+        {{ label }}
+      </span>
+    </div>
+  </UiButton>
 </template>
 
 <style scoped></style>

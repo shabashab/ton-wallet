@@ -30,7 +30,7 @@ const addressShort = computed(() => {
     class="flex flex-col items-left hover:bg-white/5 hover:cursor-pointer rounded-xl py-2 pl-2 pr-4 group"
   >
     <span class="font-medium">
-      Wallet Name
+      {{ name }}
       <AnimatePresence>
         <motion.div
           v-if="networkStore.currentNetwork === 'testnet'"

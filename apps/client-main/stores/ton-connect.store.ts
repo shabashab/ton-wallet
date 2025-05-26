@@ -90,6 +90,27 @@ export const useTonConnectStore = defineStore('ton-connect', () => {
     }
   }
 
+  const verifyQrCodeUrl = (urlString: string) => {
+    try {
+      const url = new URL(urlString)
+
+      if (url.protocol !== 'tc:') {
+        return false
+      }
+
+      const id = url.searchParams.get('id')
+      const r = url.searchParams.get('r')
+
+      if (!id || !r) {
+        return false
+      }
+
+      return true
+    } catch {
+      return false
+    }
+  }
+
   const reopenSseBridgeConnection = () => {
     if (
       activeBridgeEventSource &&
@@ -566,6 +587,8 @@ export const useTonConnectStore = defineStore('ton-connect', () => {
     synchronizeTonConnect,
 
     handleQrCodeUrl,
+    verifyQrCodeUrl,
+
     acceptConnection,
     rejectConnection,
   }

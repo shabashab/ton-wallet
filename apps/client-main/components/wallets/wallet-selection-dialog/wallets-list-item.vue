@@ -43,9 +43,8 @@ const onListItemClick = async () => {
   >
     <UiCheckmark :value="props.active" />
     <div class="text-sm" :class="props.active ? 'text-white' : 'text-white/70'">
-      {{ truncatedAddressString }}
+      Wallet {{ props.wallet.index }}: {{ truncatedAddressString }}
     </div>
-    <div class="text-right flex-1">1.00 $</div>
   </button>
 </template>
 

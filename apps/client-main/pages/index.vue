@@ -37,6 +37,7 @@ const onScanButtonClick = async () => {
       tonConnectStore.handleQrCodeUrl(text).catch((error: unknown) => {
         console.error('Failed to connect via TON Connect', error)
       })
+      return true
     }
   })
 }

@@ -175,8 +175,6 @@ export const useTonConnectStore = defineStore('ton-connect', () => {
   }
 
   const handleRequest = async (from: string, request: AnyRequest) => {
-    console.log('request', from, request)
-
     if (request.method === 'disconnect') {
       await handleDisconnectRequest(from)
     }
@@ -291,16 +289,20 @@ export const useTonConnectStore = defineStore('ton-connect', () => {
     const loadedSessions = await sessionsStorage.loadSessions()
     const mergedSessions: TonConnectSession[] = []
 
+    for (const session of tonConnectSessions.value) {
+      mergedSessions.push(session)
+    }
+
     for (const loadedSession of loadedSessions) {
-      const existingSession = tonConnectSessions.value.find(
+      const sessionExists = mergedSessions.some(
         (session) => session.ownClientId === loadedSession.ownClientId
       )
 
-      if (existingSession) {
-        mergedSessions.push(existingSession)
-      } else {
-        mergedSessions.push(loadedSession)
+      if (sessionExists) {
+        continue
       }
+
+      mergedSessions.push(loadedSession)
     }
 
     tonConnectSessions.value = mergedSessions
@@ -423,8 +425,7 @@ export const useTonConnectStore = defineStore('ton-connect', () => {
     }
 
     tonConnectSessions.value.push(tonConnectSession)
-    await saveSessions()
-    reopenSseBridgeConnection()
+    await synchronizeTonConnect()
 
     await sendBridgeMessage(tonConnectSession, message)
 

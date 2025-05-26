@@ -32,6 +32,13 @@ const onSendButtonClick = () => {
 }
 
 const onScanButtonClick = async () => {
+  // tonConnectStore
+  //   .handleQrCodeUrl(
+  //     'tc://?v=2&id=538a4851e506d89f288878d83fee44d91e3f8561196d37a51408ac4d9e964d4f&r=%7B%22manifestUrl%22%3A%22https%3A%2F%2Fton-wallet-demo-dapp.shabashab.dev%2Ftonconnect-manifest.json%22%2C%22items%22%3A%5B%7B%22name%22%3A%22ton_addr%22%7D%5D%7D&ret=none'
+  //   )
+  //   .catch((error: unknown) => {
+  //     console.error('Failed to connect via TON Connect', error)
+  //   })
   twa.showScanQrPopup({}, (text: string) => {
     if (tonConnectStore.verifyQrCodeUrl(text)) {
       tonConnectStore.handleQrCodeUrl(text).catch((error: unknown) => {

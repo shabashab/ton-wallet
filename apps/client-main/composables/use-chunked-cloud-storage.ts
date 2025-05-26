@@ -67,6 +67,12 @@ export const useChunkedCloudStorage = <T>(options: {
       currentChunkIndex++
     }
 
+    console.log('chunks', chunks)
+    for (const chunk of chunks) {
+      console.log('chunk', chunk)
+      console.log('chunk length', chunk.length)
+    }
+
     const preExistingChunksCount = await loadChunksCount()
 
     if (preExistingChunksCount > 0 && preExistingChunksCount > chunks.length) {

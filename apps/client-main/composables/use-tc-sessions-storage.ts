@@ -27,8 +27,8 @@ export const useTcSessionsStorage = () => {
     const [appName, appUrl, appClientId, ownClientId, privateKey] = sessionParts
 
     return {
-      appName,
-      appUrl,
+      appName: decodeURIComponent(appName),
+      appUrl: decodeURIComponent(appUrl),
       appClientId,
       ownClientId,
       privateKey,

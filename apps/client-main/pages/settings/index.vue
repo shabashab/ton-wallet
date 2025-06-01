@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import SettingsButton from '~/components/settings/settings-button.vue'
+import SettingsDeleteDataConfirmationDialog from '~/components/settings/settings-delete-data-confirmation-dialog.vue'
 
 /* Models */
 
@@ -7,8 +8,10 @@ import SettingsButton from '~/components/settings/settings-button.vue'
 
 /* Composables */
 const settingsStore = useSettingsStore()
+const dataDeletionStore = useDataDeletionStore()
 
 /* Refs and Reactive Variables */
+const displayDeleteDataConfirmationDialog = ref(false)
 
 /* Computed Properties */
 const currentNetworkLabel = computed(() => {
@@ -16,19 +19,32 @@ const currentNetworkLabel = computed(() => {
 })
 
 /* Methods */
+const onDeleteDataConfirm = async () => {
+  await dataDeletionStore.deleteAllUserData()
+  location.replace('/')
+}
 
 /* Lifecycle Hooks */
 </script>
 
 <template>
   <div class="py-4">
+    <SettingsDeleteDataConfirmationDialog
+      v-model:open="displayDeleteDataConfirmationDialog"
+      @confirm="onDeleteDataConfirm"
+    />
+
     <div class="flex flex-col items-stretch gap-4">
       <SettingsButton
         to="/settings/network"
         label="Network"
         :current-value="currentNetworkLabel"
       />
-      <SettingsButton label="Delete all data" item-style="danger" />
+      <SettingsButton
+        label="Delete all data"
+        item-style="danger"
+        @click="displayDeleteDataConfirmationDialog = true"
+      />
     </div>
   </div>
 </template>

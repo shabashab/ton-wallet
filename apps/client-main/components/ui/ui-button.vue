@@ -9,6 +9,7 @@ const variants = cva(
     variants: {
       buttonStyle: {
         primary: 'bg-blue-500 text-white',
+        danger: 'bg-red-500 text-white',
         secondary: 'bg-blue-500/10 text-blue-300',
         neutral: 'bg-slate-400',
       },

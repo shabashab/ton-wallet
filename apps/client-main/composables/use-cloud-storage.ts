@@ -83,9 +83,23 @@ export const useCloudStorage = () => {
     })
   }
 
+  const getKeys = (): Promise<string[]> => {
+    return new Promise<string[]>((resolve, reject) => {
+      twa.CloudStorage.getKeys((error, result) => {
+        if (error) {
+          reject(new CloudStorageError(error))
+          return
+        }
+
+        resolve(result ?? [])
+      })
+    })
+  }
+
   return {
     getItem,
     getItems,
+    getKeys,
     setItem,
     removeItems,
   }

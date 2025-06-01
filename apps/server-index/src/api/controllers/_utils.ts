@@ -165,7 +165,6 @@ export const defineController = (
                   response: {
                     '2xx': options.response as any,
                   },
-                  // TODO: add validation of response
                 }),
                 onRequest: [requireAuthMiddleware()],
                 preHandler: options.hooks?.preHandler,

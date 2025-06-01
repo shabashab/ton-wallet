@@ -29,6 +29,7 @@ const transactionSendInjection = inject<TransactionSendInjection>(
   transactionSendInjectionSymbol
 )
 const activeWalletStore = useActiveWalletStore()
+const walletsStore = useWalletsStore()
 const confirmPassword = usePasswordConfirmation()
 
 const tonApi = useTonApi()
@@ -166,7 +167,7 @@ const onApproveButtonClick = async () => {
     return
   }
 
-  const decryptedSecretKey = decryptSecretKey(
+  const decryptedSecretKey = await walletsStore.decryptSecretKey(
     activeWalletStore.activeWallet.encryptedSecretKey,
     password
   )

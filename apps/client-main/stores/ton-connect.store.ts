@@ -34,6 +34,7 @@ const LAST_EVENT_ID_CLOUD_STORAGE_KEY = 'tc-last-event-id'
 export const useTonConnectStore = defineStore('ton-connect', () => {
   const activeWalletStore = useActiveWalletStore()
   const networkStore = useNetworkStore()
+  const walletsStore = useWalletsStore()
   const sessionsStorage = useTcSessionsStorage()
   const runtimeConfig = useRuntimeConfig()
   const cloudStorage = useCloudStorage()
@@ -508,7 +509,7 @@ export const useTonConnectStore = defineStore('ton-connect', () => {
       Buffer.from(messageHash),
     ])
 
-    const secretKey = decryptSecretKey(
+    const secretKey = await walletsStore.decryptSecretKey(
       activeWalletStore.activeWallet.encryptedSecretKey,
       password
     )
